@@ -6,21 +6,20 @@ import com.jamakick.santasWorkshop.interfaces.MenuInterface;
 
 public class MainMenu implements MenuInterface {
 	
-	private Scanner input = new Scanner(System.in);
-	public void start() {
+	public void start(Scanner scanner) {
 		
 //		String userInput;
 //		
 //		do {
 //			System.out.println("Welcome to Santa's Workshop");
+//			System.out.println();
 //			
-//			userInput = input.nextLine();
+//			userInput = scanner.nextLine();
 //
 //			
 //			switch (userInput) {
 //			case "0":
-//				result = getComps(userInput);
-//				System.out.println("Result: " + result);
+//				System.out.println("Result: ");
 //				break;
 //			default:
 //				System.out.println("Invalid input please try again!");
