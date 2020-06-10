@@ -2,7 +2,7 @@ package santasWorkshop;
 
 import java.util.Scanner;
 
-import com.jamakick.santasWorkshop.object.Child;
+import com.jamakick.santasWorkshop.menu.MainMenu;
 
 public class Main {
 
@@ -10,9 +10,9 @@ public class Main {
 		
 		Scanner input = new Scanner(System.in);
 		
-		Child child = new Child(0, "Jake Kickbush", true);
+		MainMenu mainMenu = new MainMenu();
+		mainMenu.start(input);
 		
-		System.out.println(child.toString());
 
 	}
 
