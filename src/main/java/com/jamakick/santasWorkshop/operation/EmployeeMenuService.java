@@ -1,14 +1,28 @@
 package com.jamakick.santasWorkshop.operation;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.jamakick.santasWorkshop.db.ConnectionManager;
+import com.jamakick.santasWorkshop.db.NaughtyNiceService;
 import com.jamakick.santasWorkshop.interfaces.EmployeeMenuServiceInterface;
+import com.jamakick.santasWorkshop.object.Child;
 
 public class EmployeeMenuService implements EmployeeMenuServiceInterface {
+	
+	private ConnectionManager connectionManager = new ConnectionManager();
+	private Connection connection = connectionManager.getDBConnection();
 
 	@Override
-	public <T> ArrayList<T> ViewNaughtyNiceList() {
-		return null;
+	public ArrayList<Child> ViewNaughtyNiceList() {
+		
+		NaughtyNiceService naughtyNiceService = new NaughtyNiceService();
+		
+		ArrayList<Child> children;
+		
+		children = naughtyNiceService.getFullNaughtyNiceList(connection);
+		
+		return children;
 	}
 
 	@Override

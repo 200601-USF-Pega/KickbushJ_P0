@@ -35,7 +35,8 @@ public class EmployeeMenu<T> implements MenuInterface {
 		
 		switch (userInput) {
 		case "0":
-			result = employeeMenuService.ViewNaughtyNiceList();
+			result = (ArrayList<T>) employeeMenuService.ViewNaughtyNiceList();
+			System.out.println(result.toString());
 			break;
 		case "1":
 			result = employeeMenuService.ViewCurrentToyProduction();
@@ -61,7 +62,7 @@ public class EmployeeMenu<T> implements MenuInterface {
 		
 		}
 		
-		while (userInput != "6");
+		while (!userInput.equals("6"));
 		
 		
 	}
