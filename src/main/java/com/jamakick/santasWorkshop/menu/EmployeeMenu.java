@@ -3,6 +3,7 @@ package com.jamakick.santasWorkshop.menu;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.jamakick.santasWorkshop.db.ConnectionManager;
 import com.jamakick.santasWorkshop.interfaces.MenuInterface;
 import com.jamakick.santasWorkshop.operation.EmployeeMenuService;
 
@@ -10,6 +11,7 @@ public class EmployeeMenu<T> implements MenuInterface {
 	
 	private EmployeeMenuService employeeMenuService = new EmployeeMenuService();
 	private ArrayList<T> result;
+	private ConnectionManager connectionManager = new ConnectionManager();
 
 	@Override
 	public void start(Scanner scanner) {
@@ -75,6 +77,7 @@ public class EmployeeMenu<T> implements MenuInterface {
 			break;
 		case "6":
 			System.out.println("Exiting..");
+			connectionManager.closeConnection();
 			break;
 		default:
 			System.out.println("Invalid input please try again!");

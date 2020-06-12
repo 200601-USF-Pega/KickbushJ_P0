@@ -25,7 +25,10 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 
 	@Override
 	public boolean addChildToList(Child child) {
-		return false;
+		
+		boolean result = naughtyNiceService.addChildToList(connection, child);
+				
+		return result;
 	}
 
 	@Override
@@ -53,7 +56,6 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		Array results = toyHistoryService.totalDeliveredToys(connection);
 		
-		connectionManager.closeConnection();
 		
 		return results;
 	}

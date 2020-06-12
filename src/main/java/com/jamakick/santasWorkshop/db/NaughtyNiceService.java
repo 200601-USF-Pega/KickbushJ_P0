@@ -1,6 +1,7 @@
 package com.jamakick.santasWorkshop.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -49,8 +50,22 @@ public class NaughtyNiceService implements NaughtyNiceServiceInterface {
 
 	@Override
 	public boolean addChildToList(Connection connection, Child child) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		try {
+			PreparedStatement pst = connection.prepareStatement("Call insertChild(?, ?, ?);");
+			pst.setString(1, child.getChildName());
+			pst.setInt(2, child.getChildAge());
+			pst.setBoolean(3, child.getNaughty());
+			
+			pst.executeUpdate();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("Exception: " + e);
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override

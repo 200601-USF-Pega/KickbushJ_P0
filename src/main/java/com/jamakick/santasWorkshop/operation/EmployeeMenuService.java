@@ -24,7 +24,6 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		
 		 ArrayList<T> children = naughtyNiceService.getFullNaughtyNiceList(connection);
 		 
-		 connectionManager.closeConnection();
 		
 		return children;
 	}
@@ -34,7 +33,6 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		
 		ArrayList<T> toys = currentToysService.getFullToyProduction(connection);
 		
-		connectionManager.closeConnection();
 		
 		return toys;
 	}
@@ -44,7 +42,6 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		
 		ArrayList<T> toys = toyHistoryService.getFullToyHistory(connection);
 		
-		connectionManager.closeConnection();
 		
 		return toys;
 	}
@@ -54,7 +51,6 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		
 		ArrayList<T> toys = toyHistoryService.getSpecificYearToyHistory(connection, year);
 		
-		connectionManager.closeConnection();
 				
 		return toys;
 	}
@@ -64,7 +60,6 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		
 		ArrayList<T> toys = toyHistoryService.getChildToys(connection, childID);
 		
-		connectionManager.closeConnection();
 		
 		return toys;
 	}
@@ -75,7 +70,6 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		boolean created = compositeTableService.sendToyToHistory(connection, toyID, newToyYear,
 				newToyDelivered);
 		
-		connectionManager.closeConnection();
 		
 		return created;
 	}

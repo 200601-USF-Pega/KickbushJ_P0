@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.jamakick.santasWorkshop.db.ConnectionManager;
 import com.jamakick.santasWorkshop.interfaces.MenuInterface;
+import com.jamakick.santasWorkshop.object.Child;
 import com.jamakick.santasWorkshop.operation.EmployeeMenuService;
 import com.jamakick.santasWorkshop.operation.ManagerMenuService;
 
@@ -14,6 +16,7 @@ public class ManagerMenu<T> implements MenuInterface {
 	private ManagerMenuService managerMenuService = new ManagerMenuService();
 	private EmployeeMenuService employeeMenuService = new EmployeeMenuService();
 	private ArrayList<T> result;
+	private ConnectionManager connectionManager = new ConnectionManager();
 
 	@Override
 	public void start(Scanner scanner) {
@@ -50,6 +53,17 @@ public class ManagerMenu<T> implements MenuInterface {
 			System.out.println(result.toString());
 			break;
 		case "1":
+			System.out.println("What is the Child's Name?");
+			String childName = scanner.nextLine();
+			System.out.println("What is the Child's Age?");
+			int childAge = scanner.nextInt();
+			scanner.nextLine();
+			System.out.println("Is the Child naughty? (true/false)");
+			boolean naughty = scanner.nextBoolean();
+			scanner.nextLine();
+			Child addChild = new Child(childName, childAge, naughty);
+			boolean addChildResult = managerMenuService.addChildToList(addChild);
+			System.out.println(addChildResult);
 			break;
 		case "2":
 			break;
@@ -112,6 +126,7 @@ public class ManagerMenu<T> implements MenuInterface {
 			break;
 		case "14":
 			System.out.println("Exiting..");
+			connectionManager.closeConnection();
 			
 			break;
 		default:
