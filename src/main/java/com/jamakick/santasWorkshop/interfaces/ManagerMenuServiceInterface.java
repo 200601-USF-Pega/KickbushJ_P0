@@ -1,5 +1,6 @@
 package com.jamakick.santasWorkshop.interfaces;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 import com.jamakick.santasWorkshop.object.Child;
@@ -13,7 +14,7 @@ public interface ManagerMenuServiceInterface {
 	public boolean addCurrentToy(Toy toy);
 	public boolean removeCurrentToy(int toyID);
 	public ArrayList<Toy> viewToysMadeByWorker(int elvenID);
-	public int[] totalDeliveredToys();
+	public Array totalDeliveredToys();
 	public boolean addElvenWorker(Elf elf);
 	public boolean removeElvenWorker(int elvenID);
 

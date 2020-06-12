@@ -1,5 +1,6 @@
 package com.jamakick.santasWorkshop.db;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -137,13 +138,74 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 
 	@Override
 	public <T> ArrayList<T> viewToysMadeByWorker(Connection connection, int elvenID) {
-		// TODO Auto-generated method stub
+		
+		ArrayList<T> toys = new ArrayList<T>();
+		
+		try {
+			PreparedStatement pst = connection.prepareStatement("SELECT * FROM ToyHistory "
+					+ "WHERE elvenID = ?");
+			pst.setInt(1, elvenID);
+			pst.executeQuery();
+			
+			ResultSet rs = pst.getResultSet();
+			
+			while (rs.next()) {
+				
+				PastToy toy = new PastToy();
+				toy.setToyID(rs.getInt("historyID"));
+				toy.setToyName(rs.getString("toyName"));
+				toy.setToyColor(rs.getString("toyColor"));
+				toy.setWorkTime(rs.getFloat("workTime"));
+				toy.setChildID(rs.getInt("childID"));
+				toy.setElvenID(rs.getInt("elvenID"));
+				toy.setYearProduced(rs.getInt("yearProduced"));
+				toy.setDelivered(rs.getBoolean("delivered"));
+				
+				toys.add((T) toy);
+			}
+			
+			return toys;
+			
+		}
+		
+		catch (SQLException e) {
+			System.out.println("Exception: " + e);
+			e.printStackTrace();
+			
+		}
+		
 		return null;
 	}
 
 	@Override
-	public int[] totalDeliveredToys(Connection connection) {
-		// TODO Auto-generated method stub
+	public Array totalDeliveredToys(Connection connection) {
+		
+		Array result = null;
+		
+		try {
+			
+			PreparedStatement pst = connection.prepareStatement("SELECT getDelivered()");
+			
+			pst.executeQuery();
+			
+			ResultSet rs = pst.getResultSet();
+			
+			while (rs.next()) {
+				
+				result = rs.getArray("getdelivered");
+				
+			}
+			
+			return result;
+			
+			
+		}
+		
+		catch (SQLException e) {
+			System.out.println("Exception: " + e);
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 

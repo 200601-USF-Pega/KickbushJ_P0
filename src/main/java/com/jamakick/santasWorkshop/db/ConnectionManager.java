@@ -14,7 +14,7 @@ import com.jamakick.santasWorkshop.interfaces.ConnectionManagerInterface;
 
 public class ConnectionManager implements ConnectionManagerInterface {
 	
-	private Connection connection;
+	private static Connection connection;
 	private String url;
 	private String user;
 	private String pwd;
@@ -89,6 +89,16 @@ public class ConnectionManager implements ConnectionManagerInterface {
 		
 		catch (Exception e) {
 			System.out.println("Exception: " + e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void closeConnection() {
+		
+		 try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

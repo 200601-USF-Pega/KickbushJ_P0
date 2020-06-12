@@ -1,5 +1,7 @@
 package com.jamakick.santasWorkshop.menu;
 
+import java.sql.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -93,6 +95,16 @@ public class ManagerMenu<T> implements MenuInterface {
 			System.out.println(created);
 			break;
 		case "11":
+			Array deliveredResult = managerMenuService.totalDeliveredToys();
+			Integer[] printDelivered = null;
+			try {
+				printDelivered = (Integer[]) deliveredResult.getArray();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("Amount of Delivered Toys: " + printDelivered[0]);
+			System.out.println("Amount of Scrapped Toys: " + printDelivered[1]);
 			break;
 		case "12":
 			break;
@@ -100,6 +112,7 @@ public class ManagerMenu<T> implements MenuInterface {
 			break;
 		case "14":
 			System.out.println("Exiting..");
+			
 			break;
 		default:
 			System.out.println("Invalid input please try again!");

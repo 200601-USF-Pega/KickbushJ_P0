@@ -1,13 +1,27 @@
 package com.jamakick.santasWorkshop.operation;
 
+import java.sql.Array;
+import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.jamakick.santasWorkshop.db.CompositeTableService;
+import com.jamakick.santasWorkshop.db.ConnectionManager;
+import com.jamakick.santasWorkshop.db.CurrentToysService;
+import com.jamakick.santasWorkshop.db.NaughtyNiceService;
+import com.jamakick.santasWorkshop.db.ToyHistoryService;
 import com.jamakick.santasWorkshop.interfaces.ManagerMenuServiceInterface;
 import com.jamakick.santasWorkshop.object.Child;
 import com.jamakick.santasWorkshop.object.Elf;
 import com.jamakick.santasWorkshop.object.Toy;
 
 public class ManagerMenuService implements ManagerMenuServiceInterface {
+	
+	private ConnectionManager connectionManager = new ConnectionManager();
+	private Connection connection = connectionManager.getConnection();
+	private ToyHistoryService toyHistoryService = new ToyHistoryService();
+	private CurrentToysService currentToysService = new CurrentToysService();
+	private NaughtyNiceService naughtyNiceService = new NaughtyNiceService();
+	private CompositeTableService compositeTableService = new CompositeTableService();
 
 	@Override
 	public boolean addChildToList(Child child) {
@@ -35,8 +49,13 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 	}
 
 	@Override
-	public int[] totalDeliveredToys() {
-		return null;
+	public Array totalDeliveredToys() {
+		
+		Array results = toyHistoryService.totalDeliveredToys(connection);
+		
+		connectionManager.closeConnection();
+		
+		return results;
 	}
 
 	@Override
