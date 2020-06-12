@@ -19,8 +19,7 @@ public class ConnectionManager implements ConnectionManagerInterface {
 	private String filePath = "resources/sql/sqlLogin.txt";
 	private BufferedReader reader;
 
-	@Override
-	public Connection getDBConnection() {
+	public ConnectionManager() {
 		
 		try {
 			try {
@@ -45,8 +44,24 @@ public class ConnectionManager implements ConnectionManagerInterface {
 			System.out.println("Exception: " + e.getMessage());
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	@Override
+	public Connection getConnection() {
 		return connection;
+	}
+	
+	@Override
+	public void finalize() {
+		try {
+			connection.close();
+		}
+		
+		catch (Exception e) {
+			System.out.println("Exception: " + e);
+			e.printStackTrace();
+		}
 	}
 
 }

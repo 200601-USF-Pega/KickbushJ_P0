@@ -12,9 +12,9 @@ import com.jamakick.santasWorkshop.object.Child;
 public class NaughtyNiceService implements NaughtyNiceServiceInterface {
 	
 	@Override
-	public ArrayList<Child> getFullNaughtyNiceList(Connection connection) {
+	public <T> ArrayList<T> getFullNaughtyNiceList(Connection connection) {
 		
-		ArrayList<Child> children = new ArrayList<Child>();
+		ArrayList<T> children = new ArrayList<T>();
 		
 		try {
 			Statement s = connection.createStatement();
@@ -30,7 +30,7 @@ public class NaughtyNiceService implements NaughtyNiceServiceInterface {
 				child.setChildAge(rs.getInt("childAge"));
 				child.setNaughty(rs.getBoolean("naughty"));
 				
-				children.add(child);
+				children.add((T) child);
 				
 			}
 			

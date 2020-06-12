@@ -3,51 +3,69 @@ package com.jamakick.santasWorkshop.operation;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.jamakick.santasWorkshop.db.CompositeTableService;
 import com.jamakick.santasWorkshop.db.ConnectionManager;
+import com.jamakick.santasWorkshop.db.CurrentToysService;
 import com.jamakick.santasWorkshop.db.NaughtyNiceService;
+import com.jamakick.santasWorkshop.db.ToyHistoryService;
 import com.jamakick.santasWorkshop.interfaces.EmployeeMenuServiceInterface;
-import com.jamakick.santasWorkshop.object.Child;
 
 public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 	
 	private ConnectionManager connectionManager = new ConnectionManager();
-	private Connection connection = connectionManager.getDBConnection();
+	private Connection connection = connectionManager.getConnection();
+	private ToyHistoryService toyHistoryService = new ToyHistoryService();
+	private CurrentToysService currentToysService = new CurrentToysService();
+	private NaughtyNiceService naughtyNiceService = new NaughtyNiceService();
+	private CompositeTableService compositeTableService = new CompositeTableService();
 
 	@Override
-	public ArrayList<Child> ViewNaughtyNiceList() {
+	public <T> ArrayList<T> ViewNaughtyNiceList() {
 		
-		NaughtyNiceService naughtyNiceService = new NaughtyNiceService();
-		
-		ArrayList<Child> children;
-		
-		children = naughtyNiceService.getFullNaughtyNiceList(connection);
+		 ArrayList<T> children = naughtyNiceService.getFullNaughtyNiceList(connection);
 		
 		return children;
 	}
 
 	@Override
 	public <T> ArrayList<T> ViewCurrentToyProduction() {
-		return null;
+		
+		ArrayList<T> toys = currentToysService.getFullToyProduction(connection);
+		
+		return toys;
 	}
 
 	@Override
 	public <T> ArrayList<T> ViewToyHistory() {
-		return null;
+		
+		ArrayList<T> toys = toyHistoryService.getFullToyHistory(connection);
+		
+		return toys;
 	}
 
 	@Override
-	public <T> ArrayList<T> ViewSpecificYearToyHistory() {
-		return null;
+	public <T> ArrayList<T> ViewSpecificYearToyHistory(int year) {
+		
+		ArrayList<T> toys = toyHistoryService.getSpecificYearToyHistory(connection, year);
+				
+		return toys;
 	}
 
 	@Override
-	public <T> ArrayList<T> ViewAllChildsToys() {
-		return null;
+	public <T> ArrayList<T> ViewAllChildsToys(int childID) {
+		
+		ArrayList<T> toys = toyHistoryService.getChildToys(connection, childID);
+		
+		return toys;
 	}
 
 	@Override
-	public <T> ArrayList<T> SendToyToHistory() {
-		return null;
+	public boolean SendToyToHistory(int toyID, int newToyYear, boolean newToyDelivered) {
+		
+		boolean created = compositeTableService.sendToyToHistory(connection, toyID, newToyYear,
+				newToyDelivered);
+		
+		return created;
 	}
 
 }
