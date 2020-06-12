@@ -1,11 +1,14 @@
 package com.jamakick.santasWorkshop.db;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import org.apache.ibatis.jdbc.ScriptRunner;
 
 import com.jamakick.santasWorkshop.interfaces.ConnectionManagerInterface;
 
@@ -50,6 +53,32 @@ public class ConnectionManager implements ConnectionManagerInterface {
 	@Override
 	public Connection getConnection() {
 		return connection;
+	}
+	
+	public void createTablesAndDummyData() {
+		
+		
+		ScriptRunner sr = new ScriptRunner(connection);
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("resources/sql/CreateTables.sql"));
+			BufferedReader reader2 = new BufferedReader(new FileReader("resources/sql/InsertDummyData.sql"));
+			
+			sr.runScript(reader);
+			sr.runScript(reader2);
+			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@Override
