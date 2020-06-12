@@ -50,4 +50,16 @@ public class CurrentToysService  implements CurrentToysServiceInterface {
 		return null;
 	}
 
+	@Override
+	public boolean addCurrentToy(Connection connection, Toy toy) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeCurrentToy(Connection connection, int toyID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

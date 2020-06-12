@@ -135,4 +135,16 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		return null;
 	}
 
+	@Override
+	public <T> ArrayList<T> viewToysMadeByWorker(Connection connection, int elvenID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] totalDeliveredToys(Connection connection) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

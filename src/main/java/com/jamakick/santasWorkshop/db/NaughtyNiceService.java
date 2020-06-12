@@ -47,4 +47,16 @@ public class NaughtyNiceService implements NaughtyNiceServiceInterface {
 		return null;
 	}
 
+	@Override
+	public boolean addChildToList(Connection connection, Child child) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean changeChildNaughtyStatus(Connection connection, int childID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

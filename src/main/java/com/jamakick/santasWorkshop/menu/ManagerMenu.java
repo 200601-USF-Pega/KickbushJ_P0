@@ -35,7 +35,9 @@ public class ManagerMenu<T> implements MenuInterface {
 		System.out.println("[9] View All Toys made by an Individual Worker");
 		System.out.println("[10] Confirm Delivery/Scrapping of a Current Toy");
 		System.out.println("[11] View Total Number of Toys Delivered vs Scrapped");
-		System.out.println("[12] Exit");
+		System.out.println("[12] Add an Elven Worker");
+		System.out.println("[13] Remove an Elven Worker");
+		System.out.println("[14] Exit");
 		System.out.println(bar);
 		
 		userInput = scanner.nextLine();
@@ -93,17 +95,20 @@ public class ManagerMenu<T> implements MenuInterface {
 		case "11":
 			break;
 		case "12":
+			break;
+		case "13":
+			break;
+		case "14":
 			System.out.println("Exiting..");
 			break;
 		default:
 			System.out.println("Invalid input please try again!");
 			System.out.println();
-			this.start(scanner);
 			
 			
 			}
 		}
-		while (!userInput.equals("12"));
+		while (!userInput.equals("14"));
 		
 	}
 
