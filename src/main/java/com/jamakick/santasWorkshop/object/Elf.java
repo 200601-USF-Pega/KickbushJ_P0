@@ -35,6 +35,11 @@ public class Elf {
 		this.setElvenAge(elvenAge);
 	}
 	
+	public Elf(String elvenName, int elvenAge, String positionName, int shiftNumber, int numProducedToys) {
+		this(elvenName, positionName, shiftNumber, numProducedToys);
+		this.setElvenAge(elvenAge);
+	}
+	
 	
 
 	@Override

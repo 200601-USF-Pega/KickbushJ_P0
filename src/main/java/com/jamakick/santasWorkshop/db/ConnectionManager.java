@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
 
-import com.jamakick.santasWorkshop.interfaces.ConnectionManagerInterface;
+import com.jamakick.santasWorkshop.interfaces.db.ConnectionManagerInterface;
 
 public class ConnectionManager implements ConnectionManagerInterface {
 	
@@ -62,10 +62,16 @@ public class ConnectionManager implements ConnectionManagerInterface {
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader("resources/sql/CreateTables.sql"));
-			BufferedReader reader2 = new BufferedReader(new FileReader("resources/sql/InsertDummyData.sql"));
-			
 			sr.runScript(reader);
-			sr.runScript(reader2);
+			
+			reader = new BufferedReader(new FileReader("resources/sql/InsertDummyData.sql"));
+			sr.runScript(reader);
+			
+			reader = new BufferedReader(new FileReader("resources/sql/CreateFunctions.sql"));
+			sr.runScript(reader);
+			
+			reader = new BufferedReader(new FileReader("resources/sql/CreateProcedures.sql"));
+			sr.runScript(reader);
 			
 			try {
 				connection.close();

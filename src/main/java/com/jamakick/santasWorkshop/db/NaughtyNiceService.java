@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.jamakick.santasWorkshop.interfaces.NaughtyNiceServiceInterface;
+import com.jamakick.santasWorkshop.interfaces.db.NaughtyNiceServiceInterface;
 import com.jamakick.santasWorkshop.object.Child;
 
 public class NaughtyNiceService implements NaughtyNiceServiceInterface {
@@ -69,9 +69,25 @@ public class NaughtyNiceService implements NaughtyNiceServiceInterface {
 	}
 
 	@Override
-	public boolean changeChildNaughtyStatus(Connection connection, int childID) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean changeChildNaughtyStatus(Connection connection, int childID, boolean naughty) {
+		
+		try {
+			PreparedStatement pst = connection.prepareStatement("Call changeChildNaughty(?, ?);");
 
+			pst.setInt(1, childID);
+			pst.setBoolean(2, naughty);
+			
+			pst.executeUpdate();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("Exception: " + e);
+			e.printStackTrace();
+			return false;
+
+		}
+
+	}
+	
 }

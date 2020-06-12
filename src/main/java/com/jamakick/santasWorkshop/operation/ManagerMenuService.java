@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.jamakick.santasWorkshop.db.CompositeTableService;
 import com.jamakick.santasWorkshop.db.ConnectionManager;
 import com.jamakick.santasWorkshop.db.CurrentToysService;
+import com.jamakick.santasWorkshop.db.ElvenWorkersService;
 import com.jamakick.santasWorkshop.db.NaughtyNiceService;
 import com.jamakick.santasWorkshop.db.ToyHistoryService;
 import com.jamakick.santasWorkshop.interfaces.ManagerMenuServiceInterface;
@@ -22,6 +23,7 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 	private CurrentToysService currentToysService = new CurrentToysService();
 	private NaughtyNiceService naughtyNiceService = new NaughtyNiceService();
 	private CompositeTableService compositeTableService = new CompositeTableService();
+	private ElvenWorkersService elvenWorkersService = new ElvenWorkersService();
 
 	@Override
 	public boolean addChildToList(Child child) {
@@ -32,23 +34,36 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 	}
 
 	@Override
-	public boolean changeChildNaughtyStatus(int childID) {
-		return false;
+	public boolean changeChildNaughtyStatus(int childID, boolean naughty) {
+		
+		boolean result = naughtyNiceService.changeChildNaughtyStatus(connection, childID, naughty);
+		
+		return result;
 	}
 
 	@Override
 	public boolean addCurrentToy(Toy toy) {
-		return false;
+		
+		boolean result = currentToysService.addCurrentToy(connection, toy);
+		
+		return result;
 	}
 
 	@Override
 	public boolean removeCurrentToy(int toyID) {
-		return false;
+		
+		boolean result = currentToysService.removeCurrentToy(connection, toyID);
+		
+		return result;
 	}
 
 	@Override
 	public ArrayList<Toy> viewToysMadeByWorker(int elvenID) {
-		return null;
+		
+		ArrayList<Toy> toys = toyHistoryService.viewToysMadeByWorker(connection, elvenID);
+		
+		
+		return toys;
 	}
 
 	@Override
@@ -62,12 +77,18 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 
 	@Override
 	public boolean addElvenWorker(Elf elf) {
-		return false;
+		
+		boolean result = elvenWorkersService.addElvenWorker(connection, elf);
+		
+		return result;
 	}
 
 	@Override
 	public boolean removeElvenWorker(int elvenID) {
-		return false;
+		
+		boolean result = elvenWorkersService.removeElvenWorker(connection, elvenID);
+		
+		return result;
 	}
 
 }

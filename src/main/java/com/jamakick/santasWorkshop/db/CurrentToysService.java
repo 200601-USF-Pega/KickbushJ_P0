@@ -1,12 +1,13 @@
 package com.jamakick.santasWorkshop.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.jamakick.santasWorkshop.interfaces.CurrentToysServiceInterface;
+import com.jamakick.santasWorkshop.interfaces.db.CurrentToysServiceInterface;
 import com.jamakick.santasWorkshop.object.Toy;
 
 public class CurrentToysService  implements CurrentToysServiceInterface {
@@ -52,14 +53,47 @@ public class CurrentToysService  implements CurrentToysServiceInterface {
 
 	@Override
 	public boolean addCurrentToy(Connection connection, Toy toy) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		try {
+			PreparedStatement pst = connection.prepareStatement("Call addToy(?, ?, ?, ?, ?);");
+			
+			pst.setString(1, toy.getToyName());
+			pst.setString(2, toy.getToyColor());
+			pst.setFloat(3, toy.getWorkTime());
+			pst.setInt(4, toy.getChildID());
+			pst.setInt(5, toy.getElvenID());
+			
+			pst.executeUpdate();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("Exception: " + e);
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 	@Override
 	public boolean removeCurrentToy(Connection connection, int toyID) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		try {
+			PreparedStatement pst = connection.prepareStatement("Call removeToy(?);");
+			
+			pst.setInt(1, toyID);
+			
+			pst.executeUpdate();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("Exception: " + e);
+			e.printStackTrace();
+			return false;
+		}
+
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.jamakick.santasWorkshop.interfaces;
+package com.jamakick.santasWorkshop.interfaces.db;
 
 import java.sql.Array;
 import java.sql.Connection;

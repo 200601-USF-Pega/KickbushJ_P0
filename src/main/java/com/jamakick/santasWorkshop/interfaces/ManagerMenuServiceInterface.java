@@ -10,7 +10,7 @@ import com.jamakick.santasWorkshop.object.Toy;
 public interface ManagerMenuServiceInterface {
 	
 	public boolean addChildToList(Child child);
-	public boolean changeChildNaughtyStatus(int childID);
+	public boolean changeChildNaughtyStatus(int childID, boolean naughty);
 	public boolean addCurrentToy(Toy toy);
 	public boolean removeCurrentToy(int toyID);
 	public ArrayList<Toy> viewToysMadeByWorker(int elvenID);

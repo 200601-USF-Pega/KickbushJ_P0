@@ -24,6 +24,12 @@ public class Toy {
 		this.setToyColor(toyColor);
 	}
 	
+	public Toy(String toyName, String toyColor, float workTime, int childID, int elvenID) {
+		this(toyName, toyColor, workTime);
+		this.setChildID(childID);
+		this.setElvenID(elvenID);
+	}
+	
 	public Toy(int toyID, String toyName, float workTime) {
 		this(toyName, workTime);
 		this.setToyID(toyID);

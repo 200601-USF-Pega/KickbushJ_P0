@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.jamakick.santasWorkshop.interfaces.ToyHistoryServiceInterface;
+import com.jamakick.santasWorkshop.interfaces.db.ToyHistoryServiceInterface;
 import com.jamakick.santasWorkshop.object.PastToy;
 
 public class ToyHistoryService implements ToyHistoryServiceInterface {

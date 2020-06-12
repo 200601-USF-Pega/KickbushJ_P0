@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.jamakick.santasWorkshop.interfaces.CompositeTableServiceInterface;
+import com.jamakick.santasWorkshop.interfaces.db.CompositeTableServiceInterface;
 import com.jamakick.santasWorkshop.object.PastToy;
 
 public class CompositeTableService implements CompositeTableServiceInterface {
