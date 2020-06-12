@@ -2,7 +2,6 @@ package com.jamakick.santasWorkshop.menu;
 
 import java.util.Scanner;
 
-import com.jamakick.santasWorkshop.db.ConnectionManager;
 import com.jamakick.santasWorkshop.interfaces.MenuInterface;
 import com.jamakick.santasWorkshop.operation.MainMenuService;
 
