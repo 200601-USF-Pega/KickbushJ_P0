@@ -1,17 +1,15 @@
 package com.jamakick.santasWorkshop.interfaces;
 
-import java.util.ArrayList;
-
-import com.jamakick.santasWorkshop.object.Child;
+import java.util.Scanner;
 
 public interface EmployeeMenuServiceInterface {
 	
-	public <T> ArrayList<T> ViewNaughtyNiceList();
-	public <T> ArrayList<T> ViewCurrentToyProduction();
-	public <T> ArrayList<T> ViewToyHistory();
-	public <T> ArrayList<T> ViewSpecificYearToyHistory(int year);
-	public <T> ArrayList<T> ViewAllChildsToys(int childID);
-	public boolean SendToyToHistory(int toyID, int newToyYear, boolean newToyDelivered);
+	public void ViewNaughtyNiceList();
+	public void ViewCurrentToyProduction();
+	public void ViewToyHistory();
+	public void ViewSpecificYearToyHistory(Scanner scanner);
+	public void ViewAllChildsToys(Scanner scanner);
+	public void SendToyToHistory(Scanner scanner);
 	
 
 }

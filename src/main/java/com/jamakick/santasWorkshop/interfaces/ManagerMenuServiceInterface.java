@@ -1,21 +1,16 @@
 package com.jamakick.santasWorkshop.interfaces;
 
-import java.sql.Array;
-import java.util.ArrayList;
-
-import com.jamakick.santasWorkshop.object.Child;
-import com.jamakick.santasWorkshop.object.Elf;
-import com.jamakick.santasWorkshop.object.Toy;
+import java.util.Scanner;
 
 public interface ManagerMenuServiceInterface {
 	
-	public boolean addChildToList(Child child);
-	public boolean changeChildNaughtyStatus(int childID, boolean naughty);
-	public boolean addCurrentToy(Toy toy);
-	public boolean removeCurrentToy(int toyID);
-	public ArrayList<Toy> viewToysMadeByWorker(int elvenID);
-	public Array totalDeliveredToys();
-	public boolean addElvenWorker(Elf elf);
-	public boolean removeElvenWorker(int elvenID);
+	public void addChildToList(Scanner scanner);
+	public void changeChildNaughtyStatus(Scanner scanner);
+	public void addCurrentToy(Scanner scanner);
+	public void removeCurrentToy(Scanner scanner);
+	public void viewToysMadeByWorker(Scanner scanner);
+	public void totalDeliveredToys();
+	public void addElvenWorker(Scanner scanner);
+	public void removeElvenWorker(Scanner scanner);
 
 }

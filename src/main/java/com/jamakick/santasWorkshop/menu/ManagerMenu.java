@@ -51,137 +51,46 @@ public class ManagerMenu<T> implements MenuInterface {
 		
 		switch (userInput) {
 		case "0":
-			result = employeeMenuService.ViewNaughtyNiceList();
-			System.out.println(result.toString());
+			employeeMenuService.ViewNaughtyNiceList();
 			break;
 		case "1":
-			System.out.println("What is the Child's Name?");
-			String childName = scanner.nextLine();
-			System.out.println("What is the Child's Age?");
-			int childAge = scanner.nextInt();
-			scanner.nextLine();
-			System.out.println("Is the Child naughty? (true/false)");
-			boolean naughty = scanner.nextBoolean();
-			scanner.nextLine();
-			Child addChild = new Child(childName, childAge, naughty);
-			boolean addChildResult = managerMenuService.addChildToList(addChild);
-			System.out.println(addChildResult);
+			managerMenuService.addChildToList(scanner);
 			break;
 		case "2":
-			System.out.println("What is the Child's ID?");
-			int changeNaughtyChildID = scanner.nextInt();
-			scanner.nextLine();
-			System.out.println("Is the child naughty? (true/false)");
-			boolean changeNaughty = scanner.nextBoolean();
-			scanner.nextLine();
-			boolean updateChildNaughty = managerMenuService.changeChildNaughtyStatus(
-					changeNaughtyChildID, changeNaughty);
-			System.out.println(updateChildNaughty);
+			managerMenuService.changeChildNaughtyStatus(scanner);
 			break;
 		case "3":
-			result = employeeMenuService.ViewCurrentToyProduction();
-			System.out.println(result.toString());
+			employeeMenuService.ViewCurrentToyProduction();
 			break;
 		case "4":
-			System.out.println("What is the Toy Name?");
-			String addToyName = scanner.nextLine();
-			System.out.println("What is the Toy Color?");
-			String addToyColor = scanner.nextLine();
-			System.out.println("How long will the Toy take to make?");
-			float addToyWorktime = scanner.nextFloat();
-			scanner.nextLine();
-			System.out.println("What child ID is this Toy being made for?");
-			int addToyChildID = scanner.nextInt();
-			scanner.nextLine();
-			System.out.println("What elf worker ID is making this Toy?");
-			int addToyElvenID = scanner.nextInt();
-			scanner.nextLine();
-			Toy addToy = new Toy(addToyName, addToyColor, addToyWorktime, addToyChildID, addToyElvenID);
-			boolean addToyResult = managerMenuService.addCurrentToy(addToy);
-			System.out.println(addToyResult);
+			managerMenuService.addCurrentToy(scanner);
 			break;
 		case "5":
-			System.out.println("What is the Toy ID?");
-			int removeToyID = scanner.nextInt();
-			scanner.nextLine();
-			boolean removeToyResult = managerMenuService.removeCurrentToy(removeToyID);
-			System.out.println(removeToyResult);
+			managerMenuService.removeCurrentToy(scanner);
 			break;
 		case "6":
-			result = employeeMenuService.ViewToyHistory();
-			System.out.println(result.toString());
+			employeeMenuService.ViewToyHistory();
 			break;
 		case "7":
-			System.out.println("What year would you like to view history from? 2010-2020");
-			int year = scanner.nextInt();
-			scanner.nextLine();
-			result = employeeMenuService.ViewSpecificYearToyHistory(year);
-			System.out.println(result.toString());
+			employeeMenuService.ViewSpecificYearToyHistory(scanner);
 			break;
 		case "8":
-			System.out.println("What child ID's Toy History would you like to view?");
-			int childID = scanner.nextInt();
-			scanner.nextLine();
-			result = employeeMenuService.ViewAllChildsToys(childID);
-			System.out.println(result.toString());
+			employeeMenuService.ViewAllChildsToys(scanner);
 			break;
 		case "9":
-			System.out.println("What elven worker's ID would you like to view Toy History for?");
-			int viewToysElvenID = scanner.nextInt();
-			scanner.nextLine();
-			result = (ArrayList<T>) managerMenuService.viewToysMadeByWorker(viewToysElvenID);
-			System.out.println(result.toString());
+			managerMenuService.viewToysMadeByWorker(scanner);
 			break;
 		case "10":
-			System.out.println("Which Toy ID would you like to send to the Toy History?");
-			int toyID = scanner.nextInt();
-			scanner.nextLine();
-			System.out.println("What year was the toy produced?");
-			int newToyYear = scanner.nextInt();
-			scanner.nextLine();
-			System.out.println("Was the toy delivered? (True/False)");
-			boolean newToyDelivered = scanner.nextBoolean();
-			scanner.nextLine();
-			boolean created = employeeMenuService.SendToyToHistory(toyID, newToyYear, newToyDelivered);
-			System.out.println(created);
+			employeeMenuService.SendToyToHistory(scanner);
 			break;
 		case "11":
-			Array deliveredResult = managerMenuService.totalDeliveredToys();
-			Integer[] printDelivered = null;
-			try {
-				printDelivered = (Integer[]) deliveredResult.getArray();
-			} catch (SQLException e) {
-				System.out.println("Exception: " + e);
-				e.printStackTrace();
-			}
-			System.out.println("Amount of Delivered Toys: " + printDelivered[0]);
-			System.out.println("Amount of Scrapped Toys: " + printDelivered[1]);
+			managerMenuService.totalDeliveredToys();
 			break;
 		case "12":
-			System.out.println("What is the Elf's Name?");
-			String addElfName = scanner.nextLine();
-			System.out.println("What is the Elf's Age?");
-			int addElfAge = scanner.nextInt();
-			scanner.nextLine();
-			System.out.println("What is the Elf's Position Name?");
-			String addElfPositionName = scanner.nextLine();
-			System.out.println("What is the Elf's Shift Number? (1, 2, or 3)");
-			int addElfShiftNum = scanner.nextInt();
-			scanner.nextLine();
-			System.out.println("How many toys has the elf produced?");
-			int addElfToyProd = scanner.nextInt();
-			scanner.nextLine();
-			Elf addElf = new Elf(addElfName, addElfAge,
-					addElfPositionName, addElfShiftNum, addElfToyProd);
-			boolean addElfResult = managerMenuService.addElvenWorker(addElf);
-			System.out.println(addElfResult);
+			managerMenuService.addElvenWorker(scanner);
 			break;
 		case "13":
-			System.out.println("What is the Elf's ID?");
-			int removeElfID = scanner.nextInt();
-			scanner.nextLine();
-			boolean removeElfResult = managerMenuService.removeElvenWorker(removeElfID);
-			System.out.println(removeElfResult);
+			managerMenuService.removeElvenWorker(scanner);
 			break;
 		case "14":
 			System.out.println("Exiting..");

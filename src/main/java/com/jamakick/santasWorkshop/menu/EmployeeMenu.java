@@ -37,43 +37,22 @@ public class EmployeeMenu<T> implements MenuInterface {
 		
 		switch (userInput) {
 		case "0":
-			result = employeeMenuService.ViewNaughtyNiceList();
-			System.out.println(result.toString());
+			employeeMenuService.ViewNaughtyNiceList();
 			break;
 		case "1":
-			result = employeeMenuService.ViewCurrentToyProduction();
-			System.out.println(result.toString());
+			employeeMenuService.ViewCurrentToyProduction();
 			break;
 		case "2":
-			result = employeeMenuService.ViewToyHistory();
-			System.out.println(result.toString());
+			employeeMenuService.ViewToyHistory();
 			break;
 		case "3":
-			System.out.println("What year would you like to view history from? 2010-2020");
-			int year = scanner.nextInt();
-			scanner.nextLine();
-			result = employeeMenuService.ViewSpecificYearToyHistory(year);
-			System.out.println(result.toString());
+			employeeMenuService.ViewSpecificYearToyHistory(scanner);
 			break;
 		case "4":
-			System.out.println("What child ID's Toy History would you like to view?");
-			int childID = scanner.nextInt();
-			scanner.nextLine();
-			result = employeeMenuService.ViewAllChildsToys(childID);
-			System.out.println(result.toString());
+			employeeMenuService.ViewAllChildsToys(scanner);
 			break;
 		case "5":
-			System.out.println("Which Toy ID would you like to send to the Toy History?");
-			int toyID = scanner.nextInt();
-			scanner.nextLine();
-			System.out.println("What year was the toy produced?");
-			int newToyYear = scanner.nextInt();
-			scanner.nextLine();
-			System.out.println("Was the toy delivered? (True/False)");
-			boolean newToyDelivered = scanner.nextBoolean();
-			scanner.nextLine();
-			boolean created = employeeMenuService.SendToyToHistory(toyID, newToyYear, newToyDelivered);
-			System.out.println(created);
+			employeeMenuService.SendToyToHistory(scanner);
 			break;
 		case "6":
 			System.out.println("Exiting..");
