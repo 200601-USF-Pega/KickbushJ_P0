@@ -52,4 +52,26 @@ public class ElvenWorkersService implements ElvenWorkersServiceInterface {
 
 	}
 
+	@Override
+	public boolean updateElvenWorkerToys(Connection connection, int elvenID) {
+
+		PreparedStatement pst;
+		try {
+			pst = connection.prepareStatement("UPDATE ElvenWorkers "
+					+ "SET numProducedToys = numProducedToys + 1 "
+					+ "WHERE elvenID = ?");
+			
+			pst.setInt(1, elvenID);
+			pst.executeUpdate();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("Exception: " + e);
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
 }

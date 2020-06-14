@@ -209,4 +209,32 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		return null;
 	}
 
+	@Override
+	public boolean insertIntoToyHistory(Connection connection, PastToy toy) {
+		
+		try {
+		PreparedStatement pst = connection.prepareStatement("INSERT INTO ToyHistory "
+				+ "(toyName, toyColor, workTime, childID, elvenID, yearProduced, delivered) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?)");
+		pst.setString(1, toy.getToyName());
+		pst.setString(2, toy.getToyColor());	
+		pst.setFloat(3, toy.getWorkTime());
+		pst.setInt(4, toy.getChildID());
+		pst.setInt(5, toy.getElvenID());
+		pst.setInt(6, toy.getYearProduced());
+		pst.setBoolean(7, toy.isDelivered());
+		pst.executeUpdate();
+		
+		return true;
+		
+		}
+		
+		catch (SQLException e) {
+			System.out.println("Exception : " + e);
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+
 }

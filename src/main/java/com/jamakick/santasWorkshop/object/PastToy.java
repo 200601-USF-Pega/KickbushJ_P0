@@ -9,6 +9,10 @@ public class PastToy extends Toy{
 		
 	}
 	
+	public PastToy(Toy toy) {
+		super(toy.getToyID(), toy.getToyName(), toy.getWorkTime(), toy.getChildID(), toy.getElvenID());
+	}
+	
 	public PastToy(int toyID, String toyName, float workTime, int childID, int elvenID) {
 		super(toyID, toyName, workTime, childID, elvenID);
 	}

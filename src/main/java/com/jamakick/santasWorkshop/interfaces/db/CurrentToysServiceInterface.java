@@ -10,5 +10,6 @@ public interface CurrentToysServiceInterface {
 	public <T> ArrayList<T> getFullToyProduction(Connection connection);
 	public boolean addCurrentToy(Connection connection, Toy toy);
 	public boolean removeCurrentToy(Connection connection, int toyID);
+	public Toy selectFromToysByID(Connection connection, int toyID);
 
 }

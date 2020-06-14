@@ -1,15 +1,10 @@
 package com.jamakick.santasWorkshop.menu;
 
-import java.sql.Array;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.jamakick.santasWorkshop.db.ConnectionManager;
 import com.jamakick.santasWorkshop.interfaces.MenuInterface;
-import com.jamakick.santasWorkshop.object.Child;
-import com.jamakick.santasWorkshop.object.Elf;
-import com.jamakick.santasWorkshop.object.Toy;
 import com.jamakick.santasWorkshop.operation.EmployeeMenuService;
 import com.jamakick.santasWorkshop.operation.ManagerMenuService;
 
@@ -17,7 +12,6 @@ public class ManagerMenu<T> implements MenuInterface {
 	
 	private ManagerMenuService managerMenuService = new ManagerMenuService();
 	private EmployeeMenuService employeeMenuService = new EmployeeMenuService();
-	private ArrayList<T> result;
 	private ConnectionManager connectionManager = new ConnectionManager();
 
 	@Override

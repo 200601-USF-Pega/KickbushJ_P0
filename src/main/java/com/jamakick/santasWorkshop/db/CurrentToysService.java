@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.jamakick.santasWorkshop.interfaces.db.CurrentToysServiceInterface;
+import com.jamakick.santasWorkshop.object.PastToy;
 import com.jamakick.santasWorkshop.object.Toy;
 
 public class CurrentToysService  implements CurrentToysServiceInterface {
@@ -96,4 +97,40 @@ public class CurrentToysService  implements CurrentToysServiceInterface {
 		
 	}
 
+	@Override
+	public Toy selectFromToysByID(Connection connection, int toyID) {
+		
+		Toy toy = new Toy();
+
+		
+		try {
+			PreparedStatement pst = connection.prepareStatement("SELECT * FROM CurrentToys "
+					+ "WHERE toyID = ?");
+			pst.setInt(1, toyID);
+			pst.executeQuery();
+			
+			ResultSet rs = pst.getResultSet();			
+			
+			while (rs.next()) {
+				
+				
+				toy.setToyID(rs.getInt("toyID"));
+				toy.setToyName(rs.getString("toyName"));
+				toy.setToyColor(rs.getString("toyColor"));
+				toy.setWorkTime(rs.getFloat("workTime"));
+				toy.setChildID(rs.getInt("childID"));
+				toy.setElvenID(rs.getInt("elvenID"));
+
+			}
+		
+		return toy;
+		}
+		
+		catch (SQLException e) {
+			System.out.println("Exception: " + e);
+			e.printStackTrace();
+			return toy;
+		}
+
+	}
 }
