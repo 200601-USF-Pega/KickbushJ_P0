@@ -67,3 +67,15 @@ BEGIN
 	COMMIT;
 END;
 $$;
+
+CREATE OR REPLACE PROCEDURE addToyToHistory(VARCHAR, VARCHAR, REAL, INT, INT, INT, BOOLEAN)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO ToyHistory
+	(toyName, toyColor, workTime, childID, elvenID, yearProduced, delivered)
+	VALUES ($1, $2, $3, $4, $5, $6, $7);
+	
+	COMMIT;
+END;
+$$;

@@ -11,6 +11,7 @@ import com.jamakick.santasWorkshop.db.NaughtyNiceService;
 import com.jamakick.santasWorkshop.db.ToyHistoryService;
 import com.jamakick.santasWorkshop.interfaces.EmployeeMenuServiceInterface;
 import com.jamakick.santasWorkshop.object.Child;
+import com.jamakick.santasWorkshop.object.FullProductionObject;
 import com.jamakick.santasWorkshop.object.Toy;
 
 public class EmployeeMenuService implements EmployeeMenuServiceInterface {
@@ -34,9 +35,9 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 	@Override
 	public void ViewCurrentToyProduction() {
 		
-		ArrayList<Toy> toys = currentToysService.getFullToyProduction(connection);
+		ArrayList<FullProductionObject> fullProd = currentToysService.getFullToyProduction(connection);
 		
-		System.out.println(toys.toString());
+		System.out.println(fullProd.toString());
 
 	}
 

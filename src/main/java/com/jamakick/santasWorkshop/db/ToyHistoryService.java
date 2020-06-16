@@ -70,7 +70,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 				PastToy toy = new PastToy();
 				toy.setToyID(rs.getInt("historyID"));
 				toy.setToyName(rs.getString("toyName"));
-				toy.setToyColor(rs.getString("toyColor"));
+				toy.setToyColor(rs.getString("toyColor")); 
 				toy.setWorkTime(rs.getFloat("workTime"));
 				toy.setChildID(rs.getInt("childID"));
 				toy.setElvenID(rs.getInt("elvenID"));
@@ -213,9 +213,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 	public boolean insertIntoToyHistory(Connection connection, PastToy toy) {
 		
 		try {
-		PreparedStatement pst = connection.prepareStatement("INSERT INTO ToyHistory "
-				+ "(toyName, toyColor, workTime, childID, elvenID, yearProduced, delivered) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?)");
+		PreparedStatement pst = connection.prepareStatement("call addToyToHistory(?, ?, ?, ?, ?, ?, ?)");
 		pst.setString(1, toy.getToyName());
 		pst.setString(2, toy.getToyColor());	
 		pst.setFloat(3, toy.getWorkTime());

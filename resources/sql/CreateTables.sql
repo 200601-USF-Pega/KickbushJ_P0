@@ -40,3 +40,14 @@ CREATE TABLE IF NOT EXISTS ToyHistory (
 	FOREIGN KEY (childID) REFERENCES NaughtyNice (childID),
 	FOREIGN KEY (elvenID) REFERENCES ElvenWorkers (elvenID)
 );
+
+CREATE TABLE IF NOT EXISTS LoginInfo (
+	empID SMALLINT PRIMARY KEY,
+	pass VARCHAR(100) NOT NULL,
+	manager boolean NOT NULL,
+	FOREIGN KEY(empID) REFERENCES ElvenWorkers (elvenID)
+);
+
+CREATE OR REPLACE VIEW FullProduction AS select ct.toyID, ct.toyName, ct.toyColor, ct.workTime, nn.childName, nn.naughty,
+ew.elvenName, ew.positionName, ew.shiftNumber, ew.numProducedToys from CurrentToys as ct, NaughtyNice as nn, ElvenWorkers
+ as ew where ct.childID = nn.childID and ct.elvenID = ew.elvenID; 

@@ -8,37 +8,42 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.jamakick.santasWorkshop.interfaces.db.CurrentToysServiceInterface;
-import com.jamakick.santasWorkshop.object.PastToy;
+import com.jamakick.santasWorkshop.object.FullProductionObject;
 import com.jamakick.santasWorkshop.object.Toy;
 
 public class CurrentToysService  implements CurrentToysServiceInterface {
 
 	@Override
-	public <T> ArrayList<T> getFullToyProduction(Connection connection) {
+	public ArrayList<FullProductionObject> getFullToyProduction(Connection connection) {
 		
-		ArrayList<T> toys = new ArrayList<T>();
+		ArrayList<FullProductionObject> fullProd = new ArrayList<FullProductionObject>();
 		
 		try {
 			Statement s = connection.createStatement();
-			s.executeQuery("SELECT * FROM CurrentToys;");
+			s.executeQuery("SELECT * FROM FullProduction;");
 			
 			ResultSet rs = s.getResultSet();
 			
 			while (rs.next()) {
 				
-				Toy toy = new Toy();
-				toy.setToyID(rs.getInt("toyID"));
-				toy.setToyName(rs.getString("toyName"));
-				toy.setToyColor(rs.getString("toyColor"));
-				toy.setWorkTime(rs.getFloat("workTime"));
-				toy.setChildID(rs.getInt("childID"));
-				toy.setElvenID(rs.getInt("elvenID"));
+				FullProductionObject obj = new FullProductionObject();
+				obj.setToyID(rs.getInt("toyID"));
+				obj.setToyName(rs.getString("toyName"));
+				obj.setToyColor(rs.getString("toyColor"));
+				obj.setWorkTime(rs.getFloat("workTime"));
+				obj.setChildName(rs.getString("childName"));
+				obj.setNaughty(rs.getBoolean("naughty"));
+				obj.setElvenName(rs.getString("elvenName"));
+				obj.setPositionName(rs.getString("positionName"));
+				obj.setShiftNumber(rs.getInt("shiftNumber"));
+				obj.setNumProducedToys(rs.getInt("numProducedToys"));
 				
-				toys.add((T) toy);
+				fullProd.add(obj);
+				
 				
 			}
 			
-			return toys;
+			return fullProd;
 			
 		}
 		

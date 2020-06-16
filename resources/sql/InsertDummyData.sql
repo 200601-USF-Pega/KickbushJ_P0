@@ -1,4 +1,7 @@
-TRUNCATE NaughtyNice, ElvenWorkers, CurrentToys, ToyHistory CASCADE;
+TRUNCATE NaughtyNice, ElvenWorkers, CurrentToys, ToyHistory, LoginInfo CASCADE;
+
+insert into LoginInfo (empID, pass, manager) 
+	values(1, 'pass1', true), (2, 'pass2', false);
 
 insert into NaughtyNice (childName, childAge, naughty) values ('Goldy Bachshell', 6, false);
 insert into NaughtyNice (childName, childAge, naughty) values ('Clarabelle Raffeorty', 1, false);
