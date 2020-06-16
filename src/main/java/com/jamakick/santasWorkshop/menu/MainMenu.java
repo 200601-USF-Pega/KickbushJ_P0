@@ -1,9 +1,7 @@
 package com.jamakick.santasWorkshop.menu;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.jamakick.santasWorkshop.db.ConnectionManager;
 import com.jamakick.santasWorkshop.interfaces.MenuInterface;
 import com.jamakick.santasWorkshop.operation.MainMenuService;
 
@@ -33,7 +31,7 @@ public class MainMenu implements MenuInterface {
 		
 		else if (results[0] == false) {
 			
-			System.out.println("Employee Login Details Were Not Entered Correctly, Please Try Again.");
+			System.out.println("Employee Login Details Were Not Entered Correctly, Exiting...");
 			this.start(scanner);
 		}
 		

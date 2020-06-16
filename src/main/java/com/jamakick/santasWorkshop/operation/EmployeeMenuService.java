@@ -2,6 +2,7 @@ package com.jamakick.santasWorkshop.operation;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.jamakick.santasWorkshop.db.CompositeTableService;
@@ -13,7 +14,6 @@ import com.jamakick.santasWorkshop.interfaces.EmployeeMenuServiceInterface;
 import com.jamakick.santasWorkshop.object.Child;
 import com.jamakick.santasWorkshop.object.FullProductionObject;
 import com.jamakick.santasWorkshop.object.PastToy;
-import com.jamakick.santasWorkshop.object.Toy;
 import com.jamakick.santasWorkshop.tools.Beautify;
 
 public class EmployeeMenuService implements EmployeeMenuServiceInterface {
@@ -53,9 +53,29 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 	@Override
 	public void ViewSpecificYearToyHistory(Scanner scanner) {
 		
+		boolean validInput = false;
+		int year = 0;
+		
+		while(!validInput) {
+			
+		try {
 		System.out.println("What year would you like to view history from? 2010-2020");
-		int year = scanner.nextInt();
+		year = scanner.nextInt();
 		scanner.nextLine();
+		
+		if (year < 2021 & year > 2009) {
+			validInput = true;
+		}
+		else {
+			System.out.println("Please enter a year from 2010-2020");
+		}
+		
+		}
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a year from 2010-2020");
+			scanner.nextLine();
+		}
+		}
 				
 		ArrayList<PastToy> toys = toyHistoryService.getSpecificYearToyHistory(connection, year);
 		
@@ -66,9 +86,22 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 	@Override
 	public void ViewAllChildsToys(Scanner scanner) {
 		
+		boolean validInput = false;
+		int childID = 0;
+		
+		while (!validInput) {
+		try {
 		System.out.println("What child ID's Toy History would you like to view?");
-		int childID = scanner.nextInt();
+		childID = scanner.nextInt();
 		scanner.nextLine();
+		validInput = true;
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a child ID as a number.");
+			scanner.nextLine();
+			}
+		}
 		
 		ArrayList<PastToy> toys = toyHistoryService.getChildToys(connection, childID);
 		
@@ -78,15 +111,64 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 	@Override
 	public void SendToyToHistory(Scanner scanner) {
 		
-		System.out.println("Which Toy ID would you like to send to the Toy History?");
-		int toyID = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("What year was the toy produced?");
-		int newToyYear = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Was the toy delivered? (True/False)");
-		boolean newToyDelivered = scanner.nextBoolean();
-		scanner.nextLine();
+		boolean validInput = false;
+		int toyID = 0;
+		int newToyYear = 0;
+		boolean newToyDelivered = false;
+		
+		while (!validInput) {
+		try {
+		
+			System.out.println("Which Toy ID would you like to send to the Toy History?");
+			toyID = scanner.nextInt();
+			scanner.nextLine();
+			validInput = true;
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter Toy ID as a number.");
+			scanner.nextLine();
+			}
+		}
+		
+		validInput = false;
+		
+		while (!validInput) {
+		try {
+			System.out.println("What year was the toy produced?");
+			newToyYear = scanner.nextInt();
+			scanner.nextLine();
+			if (newToyYear > 2009 & newToyYear < 2021) {
+			validInput = true;
+			}
+			else {
+				System.out.println("Please enter year produced as a number greater than 2009 and less than 2021.");
+
+			}
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter year produced as a number greater than 2009 and less than 2021.");
+			scanner.nextLine();
+			}
+		}
+
+		validInput = false;
+		
+		while (!validInput) {
+		try {
+			System.out.println("Was the toy delivered? (True/False)");
+			newToyDelivered = scanner.nextBoolean();
+			scanner.nextLine();
+			validInput = true;
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter Delivered as true or false.");
+			scanner.nextLine();
+			}
+		}
+		
 		
 		boolean created = compositeTableService.sendToyToHistory(connection, toyID, newToyYear,
 				newToyDelivered);

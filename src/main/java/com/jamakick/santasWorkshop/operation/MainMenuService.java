@@ -1,6 +1,6 @@
 package com.jamakick.santasWorkshop.operation;
 
-import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.jamakick.santasWorkshop.db.ConnectionManager;
@@ -27,20 +27,33 @@ public class MainMenuService implements MainMenuServiceInterface {
 	@Override
 	public boolean[] isManager(Scanner scanner) {
 		
-		int empID;
+		int empID = 0;
+		LoginInfo info = new LoginInfo();
 		String pass;
+		boolean validInput = false;
 		final String bar = "-------------------------------------------------------------------";
 		
 		System.out.println("Welcome to Santa's Workshop");
 		System.out.println(bar);
 		System.out.println("Please enter your Employee ID and Password");
+		while (!validInput) {
+		try {
 		System.out.print("Employee ID:");
 		empID = scanner.nextInt();
 		scanner.nextLine();
+		validInput = true;
+		}
+		catch (InputMismatchException e) {
+			System.out.println("Please input a number for your Employee ID.");
+			scanner.nextLine();
+
+		}
+		}
 		System.out.print("Password:");
 		pass = scanner.nextLine();
-		
-		LoginInfo info = loginInfoService.getLoginInfo(ConnectionManager.getConnection(), empID);
+
+		try {
+		info = loginInfoService.getLoginInfo(ConnectionManager.getConnection(), empID);
 		
 		boolean passMatch = false;
 		boolean manager = false;
@@ -57,6 +70,15 @@ public class MainMenuService implements MainMenuServiceInterface {
 		
 		return results;
 		
+		}
+		
+		catch (NullPointerException e) {
+			System.out.println("Invalid Credentials given. Exiting...");
+			System.exit(0);
+			
+		}
+
+		return null;
 	}
 
 }
