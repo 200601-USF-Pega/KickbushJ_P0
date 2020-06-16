@@ -16,30 +16,23 @@ public class MainMenu implements MenuInterface {
 		
 //		connectionManager.createTablesAndDummyData();
 		
-		String userInput;
-		String bar = "-------------------------------------------------------------------";
+		boolean[] results = mainMenuService.isManager(scanner);
 		
-		System.out.println("Welcome to Santa's Workshop");
-		System.out.println(bar);
-		System.out.println("Are you a manager(head elf) or an employee(elf)?");
-		System.out.println("[0] Manager");
-		System.out.println("[1] Employee");
-		System.out.println(bar);
-
-		userInput = scanner.nextLine();
-
-		switch (userInput) {
-		case "0":
-			System.out.println("Manager selected");
-			mainMenuService.toManagerMenu(scanner);
-			break;
-		case "1":
-			System.out.println("Employee selected");
-			mainMenuService.toEmployeeMenu(scanner);
-			break;
-		default:
-			System.out.println("Invalid input please try again!");
-			System.out.println();
+		if (results[0] == true) {
+			
+			if (results[1] == true) {
+				mainMenuService.toManagerMenu(scanner);
+			}
+			
+			else if (results[1] == false) {
+				mainMenuService.toEmployeeMenu(scanner);
+			}
+			
+		}
+		
+		else if (results[0] == false) {
+			
+			System.out.println("Employee Login Details Were Not Entered Correctly, Please Try Again.");
 			this.start(scanner);
 		}
 		
