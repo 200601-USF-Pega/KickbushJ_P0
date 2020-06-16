@@ -19,7 +19,7 @@ public class NaughtyNiceService implements NaughtyNiceServiceInterface {
 		
 		try {
 			Statement s = connection.createStatement();
-			s.executeQuery("SELECT * FROM NaughtyNice;");
+			s.executeQuery("SELECT * FROM NaughtyNice ORDER BY childID ASC;");
 			
 			ResultSet rs = s.getResultSet();
 			

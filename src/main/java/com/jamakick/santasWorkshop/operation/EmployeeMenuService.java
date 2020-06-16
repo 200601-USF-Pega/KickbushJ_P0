@@ -13,6 +13,7 @@ import com.jamakick.santasWorkshop.interfaces.EmployeeMenuServiceInterface;
 import com.jamakick.santasWorkshop.object.Child;
 import com.jamakick.santasWorkshop.object.FullProductionObject;
 import com.jamakick.santasWorkshop.object.Toy;
+import com.jamakick.santasWorkshop.tools.Beautify;
 
 public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 	
@@ -28,7 +29,7 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		
 		 ArrayList<Child> children = naughtyNiceService.getFullNaughtyNiceList(connection);
 		 
-		 System.out.println(children.toString());
+		 Beautify.printChildTable(children);
 		 
 	}
 
