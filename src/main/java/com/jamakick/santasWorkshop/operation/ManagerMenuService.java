@@ -15,7 +15,9 @@ import com.jamakick.santasWorkshop.db.ToyHistoryService;
 import com.jamakick.santasWorkshop.interfaces.ManagerMenuServiceInterface;
 import com.jamakick.santasWorkshop.object.Child;
 import com.jamakick.santasWorkshop.object.Elf;
+import com.jamakick.santasWorkshop.object.PastToy;
 import com.jamakick.santasWorkshop.object.Toy;
+import com.jamakick.santasWorkshop.tools.Beautify;
 
 public class ManagerMenuService implements ManagerMenuServiceInterface {
 	
@@ -41,7 +43,12 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		boolean result = naughtyNiceService.addChildToList(connection, child);
 		
-		System.out.println(result);
+		if (result) {
+			System.out.println("Child added to the Naughty Nice list.");
+		}
+		else {
+			System.out.println("Child could not be added to the Naughty Nice list.");
+		}
 	}
 
 	@Override
@@ -56,7 +63,12 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		boolean result = naughtyNiceService.changeChildNaughtyStatus(connection, childID, naughty);
 		
-		System.out.println(result);
+		if (result) {
+			System.out.println("Child ID: " + Integer.toString(childID) + " had their naughty status changed to " + naughty + ".");
+		}
+		else {
+			System.out.println("Child ID: " + Integer.toString(childID) + "'s naughty status could not be changed.");
+		}
 	}
 
 	@Override
@@ -79,7 +91,12 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		boolean result = currentToysService.addCurrentToy(connection, toy);
 		
-		System.out.println(result);
+		if (result) {
+			System.out.println(addToyName + " was added to the Toy Production. ");
+		}
+		else {
+			System.out.println(addToyName + " could not be added to the Toy Production. ");
+		}
 	}
 
 	@Override
@@ -91,7 +108,12 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		boolean result = currentToysService.removeCurrentToy(connection, toyID);
 		
-		System.out.println(result);
+		if (result) {
+			System.out.println("Toy ID: " + Integer.toString(toyID) + " was removed from Toy Production.");
+		}
+		else {
+			System.out.println("Toy ID: " + Integer.toString(toyID) + " could not be removed from Toy Production.");
+		}
 	}
 
 	@Override
@@ -101,9 +123,9 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		int elvenID = scanner.nextInt();
 		scanner.nextLine();
 		
-		ArrayList<Toy> toys = toyHistoryService.viewToysMadeByWorker(connection, elvenID);
+		ArrayList<PastToy> toys = toyHistoryService.viewToysMadeByWorker(connection, elvenID);
 		
-		System.out.println(toys.toString());
+		Beautify.printToyHistoryTable(toys);
 	}
 
 	@Override
@@ -145,7 +167,12 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		boolean result = elvenWorkersService.addElvenWorker(connection, elf);
 		
-		System.out.println(result);
+		if (result) {
+			System.out.println(addElfName + " was added to the list of Elven Workers. ");
+		}
+		else {
+			System.out.println(addElfName + " could not be added to the list of Elven Workers. ");
+		}
 	}
 
 	@Override
@@ -157,7 +184,21 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		boolean result = elvenWorkersService.removeElvenWorker(connection, elvenID);
 		
-		System.out.println(result);
+		if (result) {
+			System.out.println("Elven ID: " + Integer.toString(elvenID) + " was removed from the list of Elven Workers.");
+		}
+		else {
+			System.out.println("Elven ID: " + Integer.toString(elvenID) + " could not be removed from the list of Elven Workers.");
+		}
+	}
+	
+	@Override
+	public void viewElvenWorkers() {
+		
+		ArrayList<Elf> elves = elvenWorkersService.viewElvenWorkers(connection);
+		
+		Beautify.printElvenWorkersTable(elves);
+		
 	}
 
 }

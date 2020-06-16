@@ -14,9 +14,9 @@ import com.jamakick.santasWorkshop.object.PastToy;
 public class ToyHistoryService implements ToyHistoryServiceInterface {
 
 	@Override
-	public <T> ArrayList<T> getFullToyHistory(Connection connection) {
+	public ArrayList<PastToy> getFullToyHistory(Connection connection) {
 		
-		ArrayList<T> toys = new ArrayList<T>();
+		ArrayList<PastToy> toys = new ArrayList<PastToy>();
 		
 		try {
 			Statement s = connection.createStatement();
@@ -36,7 +36,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 				toy.setYearProduced(rs.getInt("yearProduced"));
 				toy.setDelivered(rs.getBoolean("delivered"));
 				
-				toys.add((T) toy);
+				toys.add(toy);
 			}
 			
 			return toys;
@@ -46,16 +46,16 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		catch (SQLException e) {
 			System.out.println("Exception: " + e);
 			e.printStackTrace();
+			return null;
 			
 		}
 		
-		return null;
 	}
 
 	@Override
-	public <T> ArrayList<T> getSpecificYearToyHistory(Connection connection, int year) {
+	public ArrayList<PastToy> getSpecificYearToyHistory(Connection connection, int year) {
 		
-		ArrayList<T> toys = new ArrayList<T>();
+		ArrayList<PastToy> toys = new ArrayList<PastToy>();
 		
 		try {
 			PreparedStatement pst = connection.prepareStatement("SELECT * FROM ToyHistory "
@@ -77,7 +77,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 				toy.setYearProduced(rs.getInt("yearProduced"));
 				toy.setDelivered(rs.getBoolean("delivered"));
 				
-				toys.add((T) toy);
+				toys.add(toy);
 			}
 			
 			return toys;
@@ -95,9 +95,9 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 	}
 
 	@Override
-	public <T> ArrayList<T> getChildToys(Connection connection, int childID) {
+	public ArrayList<PastToy> getChildToys(Connection connection, int childID) {
 		
-		ArrayList<T> toys = new ArrayList<T>();
+		ArrayList<PastToy> toys = new ArrayList<PastToy>();
 		
 		try {
 			PreparedStatement pst = connection.prepareStatement("SELECT * FROM ToyHistory "
@@ -119,7 +119,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 				toy.setYearProduced(rs.getInt("yearProduced"));
 				toy.setDelivered(rs.getBoolean("delivered"));
 				
-				toys.add((T) toy);
+				toys.add(toy);
 			}
 			
 			return toys;
@@ -137,9 +137,9 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 	}
 
 	@Override
-	public <T> ArrayList<T> viewToysMadeByWorker(Connection connection, int elvenID) {
+	public ArrayList<PastToy> viewToysMadeByWorker(Connection connection, int elvenID) {
 		
-		ArrayList<T> toys = new ArrayList<T>();
+		ArrayList<PastToy> toys = new ArrayList<PastToy>();
 		
 		try {
 			PreparedStatement pst = connection.prepareStatement("SELECT * FROM ToyHistory "
@@ -161,7 +161,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 				toy.setYearProduced(rs.getInt("yearProduced"));
 				toy.setDelivered(rs.getBoolean("delivered"));
 				
-				toys.add((T) toy);
+				toys.add(toy);
 			}
 			
 			return toys;
@@ -211,7 +211,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 
 	@Override
 	public boolean insertIntoToyHistory(Connection connection, PastToy toy) {
-		
+				
 		try {
 		PreparedStatement pst = connection.prepareStatement("call addToyToHistory(?, ?, ?, ?, ?, ?, ?)");
 		pst.setString(1, toy.getToyName());

@@ -1,6 +1,5 @@
 package com.jamakick.santasWorkshop.menu;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.jamakick.santasWorkshop.db.ConnectionManager;
@@ -38,7 +37,8 @@ public class ManagerMenu<T> implements MenuInterface {
 		System.out.println("[11] View Total Number of Toys Delivered vs Scrapped");
 		System.out.println("[12] Add an Elven Worker");
 		System.out.println("[13] Remove an Elven Worker");
-		System.out.println("[14] Exit");
+		System.out.println("[14] View all Elven Workers.");
+		System.out.println("[15] Exit");
 		System.out.println(bar);
 		
 		userInput = scanner.nextLine();
@@ -87,6 +87,9 @@ public class ManagerMenu<T> implements MenuInterface {
 			managerMenuService.removeElvenWorker(scanner);
 			break;
 		case "14":
+			managerMenuService.viewElvenWorkers();
+			break;
+		case "15":
 			System.out.println("Exiting..");
 			connectionManager.closeConnection();
 			break;
@@ -95,7 +98,7 @@ public class ManagerMenu<T> implements MenuInterface {
 			System.out.println();
 			}
 		}
-		while (!userInput.equals("14"));
+		while (!userInput.equals("15"));
 		
 	}
 

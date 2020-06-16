@@ -19,7 +19,6 @@ public class CompositeTableService implements CompositeTableServiceInterface {
 			boolean newToyDelivered) {
 		
 			Toy selectToy = currentToysService.selectFromToysByID(connection, toyID);
-			
 			PastToy toy = new PastToy(selectToy);
 			toy.setYearProduced(newToyYear);
 			toy.setDelivered(newToyDelivered);

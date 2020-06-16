@@ -12,5 +12,6 @@ public interface ManagerMenuServiceInterface {
 	public void totalDeliveredToys();
 	public void addElvenWorker(Scanner scanner);
 	public void removeElvenWorker(Scanner scanner);
+	public void viewElvenWorkers();
 
 }

@@ -104,12 +104,13 @@ public class ConnectionManager {
 	
 	public void closeConnection() {
 		System.out.println("trying to close connection");
-		 try {
-			ConnectionManager.getConnection().close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		try {
+		ConnectionManager.getConnection().close();
+		}
+		catch (SQLException e) {
+			System.out.println("Exception: " + e);
 		}
 	}
+		
 
 }

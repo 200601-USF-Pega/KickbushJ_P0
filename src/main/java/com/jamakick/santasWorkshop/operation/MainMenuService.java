@@ -1,5 +1,6 @@
 package com.jamakick.santasWorkshop.operation;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.jamakick.santasWorkshop.db.ConnectionManager;
@@ -33,10 +34,10 @@ public class MainMenuService implements MainMenuServiceInterface {
 		System.out.println("Welcome to Santa's Workshop");
 		System.out.println(bar);
 		System.out.println("Please enter your Employee ID and Password");
-		System.out.println("Employee ID:");
+		System.out.print("Employee ID:");
 		empID = scanner.nextInt();
 		scanner.nextLine();
-		System.out.println("Password:");
+		System.out.print("Password:");
 		pass = scanner.nextLine();
 		
 		LoginInfo info = loginInfoService.getLoginInfo(ConnectionManager.getConnection(), empID);

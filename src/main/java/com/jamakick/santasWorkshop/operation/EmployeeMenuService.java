@@ -12,6 +12,7 @@ import com.jamakick.santasWorkshop.db.ToyHistoryService;
 import com.jamakick.santasWorkshop.interfaces.EmployeeMenuServiceInterface;
 import com.jamakick.santasWorkshop.object.Child;
 import com.jamakick.santasWorkshop.object.FullProductionObject;
+import com.jamakick.santasWorkshop.object.PastToy;
 import com.jamakick.santasWorkshop.object.Toy;
 import com.jamakick.santasWorkshop.tools.Beautify;
 
@@ -44,10 +45,9 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 	@Override
 	public void ViewToyHistory() {
 		
-		ArrayList<Toy> toys = toyHistoryService.getFullToyHistory(connection);
+		ArrayList<PastToy> toys = toyHistoryService.getFullToyHistory(connection);
 		
-		System.out.println(toys.toString());
-		
+		Beautify.printToyHistoryTable(toys);
 	}
 
 	@Override
@@ -57,9 +57,9 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		int year = scanner.nextInt();
 		scanner.nextLine();
 				
-		ArrayList<Toy> toys = toyHistoryService.getSpecificYearToyHistory(connection, year);
+		ArrayList<PastToy> toys = toyHistoryService.getSpecificYearToyHistory(connection, year);
 		
-		System.out.println(toys.toString());
+		Beautify.printToyHistoryTable(toys);
 				
 	}
 
@@ -70,9 +70,9 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		int childID = scanner.nextInt();
 		scanner.nextLine();
 		
-		ArrayList<Toy> toys = toyHistoryService.getChildToys(connection, childID);
+		ArrayList<PastToy> toys = toyHistoryService.getChildToys(connection, childID);
 		
-		System.out.println(toys.toString());
+		Beautify.printToyHistoryTable(toys);
 	}
 
 	@Override
@@ -91,7 +91,12 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		boolean created = compositeTableService.sendToyToHistory(connection, toyID, newToyYear,
 				newToyDelivered);
 		
-		System.out.println(created);
+		if (created) {
+			System.out.println("Toy ID: " + Integer.toString(toyID) + " was sent to the Toy History.");
+		}
+		else {
+			System.out.println("Toy ID: " + Integer.toString(toyID) + " was unable to be sent to Toy History.");
+		}
 
 	}
 

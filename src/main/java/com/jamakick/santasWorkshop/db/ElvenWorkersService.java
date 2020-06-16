@@ -2,10 +2,14 @@ package com.jamakick.santasWorkshop.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.jamakick.santasWorkshop.interfaces.db.ElvenWorkersServiceInterface;
 import com.jamakick.santasWorkshop.object.Elf;
+import com.jamakick.santasWorkshop.object.PastToy;
 
 public class ElvenWorkersService implements ElvenWorkersServiceInterface {
 
@@ -72,6 +76,44 @@ public class ElvenWorkersService implements ElvenWorkersServiceInterface {
 			return false;
 		}
 
+	}
+
+	@Override
+	public ArrayList<Elf> viewElvenWorkers(Connection connection) {
+		
+		ArrayList<Elf> elves = new ArrayList<Elf>();
+		
+		try {
+			Statement s = connection.createStatement();
+			s.executeQuery("SELECT * FROM ElvenWorkers;");
+			
+			ResultSet rs = s.getResultSet();
+			
+			while (rs.next()) {
+				
+				Elf elf = new Elf();
+				elf.setElvenID(rs.getInt("elvenID"));
+				elf.setElvenName(rs.getString("elvenName"));
+				elf.setElvenAge(rs.getInt("elvenAge"));
+				elf.setPositionName(rs.getString("positionName"));
+				elf.setShiftNumber(rs.getInt("shiftNumber"));
+				elf.setNumProducedToys(rs.getInt("numProducedToys"));
+				
+				elves.add(elf);
+				
+			}
+			
+			return elves;
+			
+		}
+		
+		catch (SQLException e) {
+			System.out.println("Exception: " + e);
+			e.printStackTrace();
+			return null;
+			
+		}
+		
 	}
 
 }

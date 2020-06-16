@@ -1,5 +1,6 @@
 package com.jamakick.santasWorkshop.menu;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.jamakick.santasWorkshop.db.ConnectionManager;

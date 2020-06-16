@@ -8,10 +8,10 @@ import com.jamakick.santasWorkshop.object.PastToy;
 
 public interface ToyHistoryServiceInterface {
 	
-	public <T> ArrayList<T> getFullToyHistory(Connection connection);
-	public <T> ArrayList<T> getSpecificYearToyHistory(Connection connection, int year);
-	public <T> ArrayList<T> getChildToys(Connection connection, int childID);
-	public <T> ArrayList<T> viewToysMadeByWorker(Connection connection, int elvenID);
+	public ArrayList<PastToy> getFullToyHistory(Connection connection);
+	public ArrayList<PastToy> getSpecificYearToyHistory(Connection connection, int year);
+	public ArrayList<PastToy> getChildToys(Connection connection, int childID);
+	public ArrayList<PastToy> viewToysMadeByWorker(Connection connection, int elvenID);
 	public Array totalDeliveredToys(Connection connection);
 	public boolean insertIntoToyHistory(Connection connection, PastToy toy);
 
