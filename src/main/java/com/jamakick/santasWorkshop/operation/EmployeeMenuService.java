@@ -38,7 +38,7 @@ public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 		
 		ArrayList<FullProductionObject> fullProd = currentToysService.getFullToyProduction(connection);
 		
-		System.out.println(fullProd.toString());
+		Beautify.printFullProductionTable(fullProd);
 
 	}
 

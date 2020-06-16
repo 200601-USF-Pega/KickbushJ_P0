@@ -24,6 +24,13 @@ public class ConnectionManager implements ConnectionManagerInterface {
 
 	public ConnectionManager() {
 		
+		System.out.println("creating connectionManager");
+
+	}
+
+	@Override
+	public Connection getConnection() {
+		System.out.println("trying to get connection:");
 		try {
 			try {
 			reader = new BufferedReader(new FileReader(filePath));
@@ -31,27 +38,23 @@ public class ConnectionManager implements ConnectionManagerInterface {
 			url = reader.readLine();
 			user = reader.readLine();
 			pwd = reader.readLine();
-			
 			}
 			
 			catch (IOException e) {
 				System.out.println("SQL Login not found.");
 				e.printStackTrace();
+				return null;
 				
 			}
-			
 			connection = DriverManager.getConnection(url, user, pwd);
 		}
 		
 		catch(SQLException e) {
 			System.out.println("Exception: " + e.getMessage());
 			e.printStackTrace();
+			return null;
 		}
-
-	}
-
-	@Override
-	public Connection getConnection() {
+		
 		return connection;
 	}
 	
@@ -100,7 +103,7 @@ public class ConnectionManager implements ConnectionManagerInterface {
 	}
 	
 	public void closeConnection() {
-		
+		System.out.println("trying to close connection");
 		 try {
 			connection.close();
 		} catch (SQLException e) {
