@@ -17,8 +17,7 @@ import com.jamakick.santasWorkshop.tools.Beautify;
 
 public class EmployeeMenuService implements EmployeeMenuServiceInterface {
 	
-	private ConnectionManager connectionManager = new ConnectionManager();
-	private Connection connection = connectionManager.getConnection();
+	private Connection connection = ConnectionManager.getConnection();
 	private ToyHistoryService toyHistoryService = new ToyHistoryService();
 	private CurrentToysService currentToysService = new CurrentToysService();
 	private NaughtyNiceService naughtyNiceService = new NaughtyNiceService();

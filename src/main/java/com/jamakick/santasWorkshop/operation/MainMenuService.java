@@ -14,7 +14,6 @@ public class MainMenuService implements MainMenuServiceInterface {
 	private ManagerMenu managerMenu = new ManagerMenu();
 	private EmployeeMenu employeeMenu = new EmployeeMenu();
 	private LoginInfoService loginInfoService = new LoginInfoService();
-	private ConnectionManager connectionManager = new ConnectionManager();
 	
 	public void toManagerMenu(Scanner scanner) {
 		managerMenu.start(scanner);
@@ -40,7 +39,7 @@ public class MainMenuService implements MainMenuServiceInterface {
 		System.out.println("Password:");
 		pass = scanner.nextLine();
 		
-		LoginInfo info = loginInfoService.getLoginInfo(connectionManager.getConnection(), empID);
+		LoginInfo info = loginInfoService.getLoginInfo(ConnectionManager.getConnection(), empID);
 		
 		boolean passMatch = false;
 		boolean manager = false;

@@ -10,26 +10,24 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
 
-import com.jamakick.santasWorkshop.interfaces.db.ConnectionManagerInterface;
-
-public class ConnectionManager implements ConnectionManagerInterface {
-	
-	private static Connection connection;
-	private String url;
-	private String user;
-	private String pwd;
-	
-	private String filePath = "resources/sql/sqlLogin.txt";
-	private BufferedReader reader;
+public class ConnectionManager {
 
 	public ConnectionManager() {
 		
 		System.out.println("creating connectionManager");
 
 	}
-
-	@Override
-	public Connection getConnection() {
+	
+	public static Connection getConnection() {
+		
+		Connection connection;
+		String url;
+		String user;
+		String pwd;
+		
+		String filePath = "resources/sql/sqlLogin.txt";
+		BufferedReader reader;
+		
 		System.out.println("trying to get connection:");
 		try {
 			try {
@@ -38,6 +36,8 @@ public class ConnectionManager implements ConnectionManagerInterface {
 			url = reader.readLine();
 			user = reader.readLine();
 			pwd = reader.readLine();
+			
+			reader.close();
 			}
 			
 			catch (IOException e) {
@@ -61,7 +61,7 @@ public class ConnectionManager implements ConnectionManagerInterface {
 	public void createTablesAndDummyData() {
 		
 		
-		ScriptRunner sr = new ScriptRunner(connection);
+		ScriptRunner sr = new ScriptRunner(ConnectionManager.getConnection());
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader("resources/sql/CreateTables.sql"));
@@ -77,7 +77,7 @@ public class ConnectionManager implements ConnectionManagerInterface {
 			sr.runScript(reader);
 			
 			try {
-				connection.close();
+				ConnectionManager.getConnection().close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -93,7 +93,7 @@ public class ConnectionManager implements ConnectionManagerInterface {
 	@Override
 	public void finalize() {
 		try {
-			connection.close();
+			ConnectionManager.getConnection().close();
 		}
 		
 		catch (Exception e) {
@@ -105,7 +105,7 @@ public class ConnectionManager implements ConnectionManagerInterface {
 	public void closeConnection() {
 		System.out.println("trying to close connection");
 		 try {
-			connection.close();
+			ConnectionManager.getConnection().close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
