@@ -20,7 +20,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		
 		try {
 			Statement s = connection.createStatement();
-			s.executeQuery("SELECT * FROM ToyHistory;");
+			s.executeQuery("SELECT * FROM ToyHistory ORDER BY historyID ASC;");
 			
 			ResultSet rs = s.getResultSet();
 			
@@ -44,9 +44,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
-			return null;
+			return toys;
 			
 		}
 		
@@ -59,7 +57,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		
 		try {
 			PreparedStatement pst = connection.prepareStatement("SELECT * FROM ToyHistory "
-					+ "WHERE yearProduced = ?");
+					+ "WHERE yearProduced = ? ORDER BY historyID ASC");
 			pst.setInt(1, year);
 			pst.executeQuery();
 			
@@ -85,13 +83,11 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
+			return toys;
 			
 		}
 		
 		
-		return null;
 	}
 
 	@Override
@@ -101,7 +97,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		
 		try {
 			PreparedStatement pst = connection.prepareStatement("SELECT * FROM ToyHistory "
-					+ "WHERE childID = ?");
+					+ "WHERE childID = ? ORDER BY historyID ASC");
 			pst.setInt(1, childID);
 			pst.executeQuery();
 			
@@ -127,13 +123,11 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
+			return toys;
 			
 		}
 		
 		
-		return null;
 	}
 
 	@Override
@@ -143,7 +137,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		
 		try {
 			PreparedStatement pst = connection.prepareStatement("SELECT * FROM ToyHistory "
-					+ "WHERE elvenID = ?");
+					+ "WHERE elvenID = ? ORDER BY historyID ASC");
 			pst.setInt(1, elvenID);
 			pst.executeQuery();
 			
@@ -169,7 +163,7 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			return null;
+			return toys;
 			
 		}
 		
@@ -200,11 +194,9 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
+			return result;
 		}
 		
-		return null;
 	}
 
 	@Override
@@ -226,8 +218,6 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			System.out.println("Exception : " + e);
-			e.printStackTrace();
 			return false;
 		}
 		

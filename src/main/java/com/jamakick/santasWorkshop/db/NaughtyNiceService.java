@@ -13,9 +13,9 @@ import com.jamakick.santasWorkshop.object.Child;
 public class NaughtyNiceService implements NaughtyNiceServiceInterface {
 	
 	@Override
-	public <T> ArrayList<T> getFullNaughtyNiceList(Connection connection) {
+	public ArrayList<Child> getFullNaughtyNiceList(Connection connection) {
 		
-		ArrayList<T> children = new ArrayList<T>();
+		ArrayList<Child> children = new ArrayList<Child>();
 		
 		try {
 			Statement s = connection.createStatement();
@@ -31,7 +31,7 @@ public class NaughtyNiceService implements NaughtyNiceServiceInterface {
 				child.setChildAge(rs.getInt("childAge"));
 				child.setNaughty(rs.getBoolean("naughty"));
 				
-				children.add((T) child);
+				children.add(child);
 				
 			}
 			
@@ -40,12 +40,10 @@ public class NaughtyNiceService implements NaughtyNiceServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
+			return children;
 			
 		}
 		
-		return null;
 	}
 
 	@Override

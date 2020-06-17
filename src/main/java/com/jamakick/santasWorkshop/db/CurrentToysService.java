@@ -20,7 +20,7 @@ public class CurrentToysService  implements CurrentToysServiceInterface {
 		
 		try {
 			Statement s = connection.createStatement();
-			s.executeQuery("SELECT * FROM FullProduction;");
+			s.executeQuery("SELECT * FROM FullProduction ORDER BY toyID ASC;");
 			
 			ResultSet rs = s.getResultSet();
 			
@@ -48,13 +48,11 @@ public class CurrentToysService  implements CurrentToysServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
+			return fullProd;
 			
 		}
 		
 		
-		return null;
 	}
 
 	@Override
@@ -106,7 +104,7 @@ public class CurrentToysService  implements CurrentToysServiceInterface {
 		
 		try {
 			PreparedStatement pst = connection.prepareStatement("SELECT * FROM CurrentToys "
-					+ "WHERE toyID = ?");
+					+ "WHERE toyID = ? ORDER BY toyID ASC");
 			pst.setInt(1, toyID);
 			pst.executeQuery();
 			
@@ -128,8 +126,6 @@ public class CurrentToysService  implements CurrentToysServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
 			return toy;
 		}
 

@@ -36,8 +36,6 @@ public class LoginInfoService implements LoginInfoServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
 			return info;
 		
 		}

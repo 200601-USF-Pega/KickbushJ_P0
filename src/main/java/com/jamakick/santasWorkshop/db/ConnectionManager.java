@@ -14,8 +14,6 @@ public class ConnectionManager {
 
 	public ConnectionManager() {
 		
-		System.out.println("creating connectionManager");
-
 	}
 	
 	public static Connection getConnection() {
@@ -28,7 +26,6 @@ public class ConnectionManager {
 		String filePath = "resources/sql/sqlLogin.txt";
 		BufferedReader reader;
 		
-		System.out.println("trying to get connection:");
 		try {
 			try {
 			reader = new BufferedReader(new FileReader(filePath));
@@ -103,7 +100,6 @@ public class ConnectionManager {
 	}
 	
 	public void closeConnection() {
-		System.out.println("trying to close connection");
 		try {
 		ConnectionManager.getConnection().close();
 		}
