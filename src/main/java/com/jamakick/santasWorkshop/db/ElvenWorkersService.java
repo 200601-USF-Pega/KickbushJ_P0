@@ -30,8 +30,6 @@ public class ElvenWorkersService implements ElvenWorkersServiceInterface {
 			return true;
 			
 		} catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
 			return false;
 		}
 	}
@@ -49,8 +47,6 @@ public class ElvenWorkersService implements ElvenWorkersServiceInterface {
 			return true;
 			
 		} catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
 			return false;
 		}
 

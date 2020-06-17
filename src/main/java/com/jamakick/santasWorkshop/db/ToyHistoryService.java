@@ -169,12 +169,10 @@ public class ToyHistoryService implements ToyHistoryServiceInterface {
 		}
 		
 		catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
+			return null;
 			
 		}
 		
-		return null;
 	}
 
 	@Override

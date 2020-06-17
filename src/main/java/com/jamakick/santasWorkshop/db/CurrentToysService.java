@@ -74,8 +74,6 @@ public class CurrentToysService  implements CurrentToysServiceInterface {
 			return true;
 			
 		} catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
 			return false;
 		}
 		
@@ -94,8 +92,6 @@ public class CurrentToysService  implements CurrentToysServiceInterface {
 			return true;
 			
 		} catch (SQLException e) {
-			System.out.println("Exception: " + e);
-			e.printStackTrace();
 			return false;
 		}
 

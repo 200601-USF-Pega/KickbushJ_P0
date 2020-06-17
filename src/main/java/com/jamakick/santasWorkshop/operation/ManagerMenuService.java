@@ -4,9 +4,10 @@ import java.sql.Array;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import com.jamakick.santasWorkshop.db.CompositeTableService;
 import com.jamakick.santasWorkshop.db.ConnectionManager;
 import com.jamakick.santasWorkshop.db.CurrentToysService;
 import com.jamakick.santasWorkshop.db.ElvenWorkersService;
@@ -25,20 +26,69 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 	private ToyHistoryService toyHistoryService = new ToyHistoryService();
 	private CurrentToysService currentToysService = new CurrentToysService();
 	private NaughtyNiceService naughtyNiceService = new NaughtyNiceService();
-	private CompositeTableService compositeTableService = new CompositeTableService();
 	private ElvenWorkersService elvenWorkersService = new ElvenWorkersService();
 
 	@Override
 	public void addChildToList(Scanner scanner) {
 		
-		System.out.println("What is the Child's Name?");
-		String childName = scanner.nextLine();
-		System.out.println("What is the Child's Age?");
-		int childAge = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Is the Child naughty? (true/false)");
-		boolean naughty = scanner.nextBoolean();
-		scanner.nextLine();
+		boolean validInput = false;
+		int childAge = 0;
+		boolean naughty = false;
+		String childName = "";
+		
+		while (!validInput) {
+			
+			System.out.println("What is the Child's Name?");
+			childName = scanner.nextLine();
+			
+			if (childName.matches("[a-zA-Z ]+")) {
+				validInput = true;
+			}
+			
+			else {
+				System.out.println("Please enter a Child's Name, only letters and spaces.");
+			}
+		
+		}
+		
+		validInput = false;
+		
+		while (!validInput) {
+		try {
+			System.out.println("What is the Child's Age?");
+			childAge = scanner.nextInt();
+			scanner.nextLine();
+			if (childAge > -1 & childAge < 19) {
+			validInput = true;
+			}
+			else {
+				System.out.println("Please enter child age as a number between 0 and 18.");
+			}
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter child age as a number between 0 and 18.");
+			scanner.nextLine();
+			}
+		} 
+
+		validInput = false;
+		
+		while (!validInput) {
+		try {
+			System.out.println("Is the Child naughty? (true/false)");
+			naughty = scanner.nextBoolean();
+			scanner.nextLine();
+			validInput = true;
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter naughty as true or false.");
+			scanner.nextLine();
+			}
+		} 
+
+		
 		Child child = new Child(childName, childAge, naughty);
 		
 		boolean result = naughtyNiceService.addChildToList(connection, child);
@@ -54,12 +104,48 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 	@Override
 	public void changeChildNaughtyStatus(Scanner scanner) {
 		
+		boolean validInput = false;
+		int childID = 0;
+		boolean naughty = false;
+		
+		while (!validInput) {
+			
+		try {
 		System.out.println("What is the Child's ID?");
-		int childID = scanner.nextInt();
+		childID = scanner.nextInt();
 		scanner.nextLine();
-		System.out.println("Is the child naughty? (true/false)");
-		boolean naughty = scanner.nextBoolean();
-		scanner.nextLine();
+		if ( childID > -1) {
+		validInput = true;
+		}
+		else {
+			System.out.println("Please enter a non negative number for the child ID.");
+		}
+		
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a non negative number for the child ID.");
+			scanner.nextLine();
+		}
+		
+		}
+		
+		validInput = true;
+		
+		while (!validInput) {
+		try {
+			System.out.println("Is the child naughty? (true/false)");
+			naughty = scanner.nextBoolean();
+			scanner.nextLine();
+			validInput = true;
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter naughty as true or false.");
+			scanner.nextLine();
+			}
+		} 
+
 		
 		boolean result = naughtyNiceService.changeChildNaughtyStatus(connection, childID, naughty);
 		
@@ -74,19 +160,128 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 	@Override
 	public void addCurrentToy(Scanner scanner) {
 		
-		System.out.println("What is the Toy Name?");
-		String addToyName = scanner.nextLine();
-		System.out.println("What is the Toy Color?");
-		String addToyColor = scanner.nextLine();
-		System.out.println("How long will the Toy take to make?");
-		float addToyWorktime = scanner.nextFloat();
-		scanner.nextLine();
-		System.out.println("What child ID is this Toy being made for?");
-		int addToyChildID = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("What elf worker ID is making this Toy?");
-		int addToyElvenID = scanner.nextInt();
-		scanner.nextLine();
+		boolean validInput = false;
+		String addToyName = "";
+		String addToyColor = "";
+		float addToyWorktime = 0;
+		int addToyChildID = 0;
+		int addToyElvenID = 0;
+		
+		while (!validInput) {
+			
+			System.out.println("What is the Toy Name?");
+			addToyName = scanner.nextLine();
+			
+			if (addToyName.matches("[a-zA-Z0-9 ]+")) {
+				validInput = true;
+			}
+			
+			else {
+				System.out.println("Please enter a Toy Name, with only letters, spaces, and numbers.");
+			}
+		
+		}
+		
+		validInput = true;
+		
+		while (!validInput) {
+			
+			System.out.println("What is the Toy Color?");
+			addToyColor = scanner.nextLine();
+			
+			if (addToyName.matches("[a-zA-Z ]+")) {
+				validInput = true;
+			}
+			
+			else {
+				System.out.println("Please enter a Toy Color, with only letters and spaces.");
+			}
+		
+		}
+		
+		validInput = true;
+		
+		while (!validInput) {
+			
+		try {
+			System.out.println("How long will the Toy take to make?");
+			addToyWorktime = scanner.nextFloat();
+			scanner.nextLine();
+			
+		if (addToyWorktime >= 0) {
+			validInput = true;
+		}
+		
+		else {
+			System.out.println("Please enter a non negative float for the Work Time.");
+		}
+		
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a non negative float for the Work Time.");
+			scanner.nextLine();
+		}
+		
+		}
+		
+		validInput = true;
+		
+		
+		while (!validInput) {
+			
+		try {
+			System.out.println("What child ID is this Toy being made for?");
+			addToyChildID = scanner.nextInt();
+			scanner.nextLine();
+			
+			
+		if (addToyChildID >= 0) {
+			validInput = true;
+		}
+		
+		else {
+			System.out.println("Please enter a non negative child ID.");
+		}
+		
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a non negative child ID.");
+			scanner.nextLine();
+		}
+		
+		}
+		
+		validInput = true;
+		
+		
+		while (!validInput) {
+			
+		try {
+			System.out.println("What elf worker ID is making this Toy?");
+			addToyElvenID = scanner.nextInt();
+			scanner.nextLine();
+			
+			
+		if (addToyElvenID >= 0) {
+			validInput = true;
+		}
+		
+		else {
+			System.out.println("Please enter a non negative elven ID.");
+		}
+		
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a non negative elven ID.");
+			scanner.nextLine();
+		}
+		
+		}
+		
+		
 		Toy toy = new Toy(addToyName, addToyColor, addToyWorktime, addToyChildID, addToyElvenID);
 		
 		boolean result = currentToysService.addCurrentToy(connection, toy);
@@ -102,9 +297,33 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 	@Override
 	public void removeCurrentToy(Scanner scanner) {
 		
-		System.out.println("What is the Toy ID?");
-		int toyID = scanner.nextInt();
-		scanner.nextLine();
+		boolean validInput = false;
+		int toyID = 0;
+		
+		while (!validInput) {
+			
+		try {
+			System.out.println("What is the Toy ID?");
+			toyID = scanner.nextInt();
+			scanner.nextLine();
+			
+			
+		if (toyID >= 0) {
+			validInput = true;
+		}
+		
+		else {
+			System.out.println("Please enter a non negative Toy ID.");
+		}
+		
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a non negative Toy ID.");
+			scanner.nextLine();
+		}
+		
+		}
 		
 		boolean result = currentToysService.removeCurrentToy(connection, toyID);
 		
@@ -119,9 +338,33 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 	@Override
 	public void viewToysMadeByWorker(Scanner scanner) {
 		
-		System.out.println("What elven worker's ID would you like to view Toy History for?");
-		int elvenID = scanner.nextInt();
-		scanner.nextLine();
+		boolean validInput = false;
+		int elvenID = 0;
+		
+		while (!validInput) {
+			
+		try {
+			System.out.println("What elven worker's ID would you like to view Toy History for?");
+			elvenID = scanner.nextInt();
+			scanner.nextLine();
+			
+			
+		if (elvenID >= 0) {
+			validInput = true;
+		}
+		
+		else {
+			System.out.println("Please enter a non negative Elven ID.");
+		}
+		
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a non negative Elven ID.");
+			scanner.nextLine();
+		}
+		
+		}
 		
 		ArrayList<PastToy> toys = toyHistoryService.viewToysMadeByWorker(connection, elvenID);
 		
@@ -149,19 +392,128 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 	@Override
 	public void addElvenWorker(Scanner scanner) {
 		
-		System.out.println("What is the Elf's Name?");
-		String addElfName = scanner.nextLine();
-		System.out.println("What is the Elf's Age?");
-		int addElfAge = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("What is the Elf's Position Name?");
-		String addElfPositionName = scanner.nextLine();
-		System.out.println("What is the Elf's Shift Number? (1, 2, or 3)");
-		int addElfShiftNum = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("How many toys has the elf produced?");
-		int addElfToyProd = scanner.nextInt();
-		scanner.nextLine();
+		boolean validInput = false;
+		String addElfName = "";
+		int addElfAge = 0;
+		String addElfPositionName = "";
+		int addElfShiftNum = 0;
+		int addElfToyProd = 0;
+		
+		while (!validInput) {
+			
+			System.out.println("What is the Elf's Name?");
+			addElfName = scanner.nextLine();
+			
+			if (addElfName.matches("[a-zA-Z ]+")) {
+				validInput = true;
+			}
+			
+			else {
+				System.out.println("Please enter an Elf name with only letters and spaces.");
+			}
+		
+		}
+		
+		validInput = false;
+		
+		while (!validInput) {
+			
+		try {
+			System.out.println("What is the Elf's Age?");
+			addElfAge = scanner.nextInt();
+			scanner.nextLine();
+			
+			
+		if (addElfAge >= 0 & addElfAge < 120) {
+			validInput = true;
+		}
+		
+		else {
+			System.out.println("Please enter an Elf Age from 0 to 120.");
+		}
+		
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter an Elf Age from 0 to 120.");
+			scanner.nextLine();
+		}
+		
+		}
+
+		validInput = false;
+		
+		
+		while (!validInput) {
+			
+			System.out.println("What is the Elf's Position Name?");
+			addElfPositionName = scanner.nextLine();
+			
+			if (addElfPositionName.matches("[a-zA-Z ]+")) {
+				validInput = true;
+			}
+			
+			else {
+				System.out.println("Please enter a position name with only letters and spaces.");
+			}
+		
+		}
+
+		validInput = false;
+		
+		
+		while (!validInput) {
+			
+		try {
+			System.out.println("What is the Elf's Shift Number? (1, 2, or 3)");
+			addElfShiftNum = scanner.nextInt();
+			scanner.nextLine();
+			
+			
+		if (addElfShiftNum > 0 & addElfShiftNum < 4) {
+			validInput = true;
+		}
+		
+		else {
+			System.out.println("Please enter a Shift Number (1,2,3)");
+		}
+		
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a Shift Number (1,2,3)");
+			scanner.nextLine();
+		}
+		
+		}
+		
+		validInput = false;
+		
+		while (!validInput) {
+			
+		try {
+			System.out.println("How many toys has the elf produced?");
+			addElfToyProd = scanner.nextInt();
+			scanner.nextLine();
+			
+			
+		if (addElfToyProd >= 0) {
+			validInput = true;
+		}
+		
+		else {
+			System.out.println("Please enter a non negative number of produced toys.");
+		}
+		
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a non negative number of produced toys.");
+			scanner.nextLine();
+		}
+		
+		}
+		
 		Elf elf = new Elf(addElfName, addElfAge,
 				addElfPositionName, addElfShiftNum, addElfToyProd);
 		
@@ -178,9 +530,34 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 	@Override
 	public void removeElvenWorker(Scanner scanner) {
 		
-		System.out.println("What is the Elf's ID?");
-		int elvenID = scanner.nextInt();
-		scanner.nextLine();
+		boolean validInput = false;
+		int elvenID = 0;
+		
+		
+		while (!validInput) {
+			
+		try {
+			System.out.println("What is the Elf's ID?");
+			elvenID = scanner.nextInt();
+			scanner.nextLine();
+			
+			
+		if (elvenID >= 0) {
+			validInput = true;
+		}
+		
+		else {
+			System.out.println("Please enter a non negative elven ID number.");
+		}
+		
+		}
+		
+		catch (InputMismatchException e) {
+			System.out.println("Please enter a non negative elven ID number.");
+			scanner.nextLine();
+		}
+		
+		}
 		
 		boolean result = elvenWorkersService.removeElvenWorker(connection, elvenID);
 		

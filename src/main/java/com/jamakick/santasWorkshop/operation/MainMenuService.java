@@ -15,6 +15,7 @@ public class MainMenuService implements MainMenuServiceInterface {
 	private ManagerMenu managerMenu = new ManagerMenu();
 	private EmployeeMenu employeeMenu = new EmployeeMenu();
 	private LoginInfoService loginInfoService = new LoginInfoService();
+	private ConnectionManager connectionManager = new ConnectionManager();
 	
 	public void toManagerMenu(Scanner scanner) {
 		managerMenu.start(scanner);
