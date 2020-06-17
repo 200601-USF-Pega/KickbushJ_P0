@@ -79,7 +79,7 @@ public class ElvenWorkersService implements ElvenWorkersServiceInterface {
 		
 		try {
 			Statement s = connection.createStatement();
-			s.executeQuery("SELECT * FROM ElvenWorkers; ORDER BY elvenID ASC");
+			s.executeQuery("SELECT * FROM ElvenWorkers ORDER BY elvenID ASC;");
 			
 			ResultSet rs = s.getResultSet();
 			

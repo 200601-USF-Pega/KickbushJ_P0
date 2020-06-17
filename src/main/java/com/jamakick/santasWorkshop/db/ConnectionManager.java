@@ -9,10 +9,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 
 public class ConnectionManager {
+	
+	static final Logger logger = Logger.getLogger(ConnectionManager.class);
 
 	public ConnectionManager() {
+		
+		BasicConfigurator.configure();
+		logger.debug("Creating Connection Manager");
+		
 		
 	}
 	
@@ -57,6 +65,8 @@ public class ConnectionManager {
 	
 	public void createTablesAndDummyData() {
 		
+		logger.debug("Creating Tables and Data");
+		
 		
 		ScriptRunner sr = new ScriptRunner(ConnectionManager.getConnection());
 		
@@ -100,10 +110,14 @@ public class ConnectionManager {
 	}
 	
 	public void closeConnection() {
+		
+		logger.debug("Closing Connection");
+		
 		try {
 		ConnectionManager.getConnection().close();
 		}
 		catch (SQLException e) {
+			System.out.println("Problem closing the database connection.");
 			System.out.println("Exception: " + e);
 		}
 	}
