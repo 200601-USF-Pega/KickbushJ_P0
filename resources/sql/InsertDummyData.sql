@@ -11,12 +11,13 @@ insert into NaughtyNice (childName, childAge, naughty) values ('Jennifer Brown',
 
 insert into ElvenWorkers (elvenName, elvenAge, positionName, shiftNumber, numProducedToys) values ('Ashley Batrick', 42, 'Head Elf', 1, 489);
 insert into ElvenWorkers (elvenName, elvenAge, positionName, shiftNumber, numProducedToys) values ('Lesli Alyoshin', 27, 'Senior Toymaker', 3, 81);
-insert into ElvenWorkers (elvenName, elvenAge, positionName, shiftNumber, numProducedToys) values ('Winston Lauchlan', null, 'Junior ToyMaker' 2, 67);
+insert into ElvenWorkers (elvenName, elvenAge, positionName, shiftNumber, numProducedToys) values ('Winston Lauchlan', 26, 'Junior Toymaker', 2, 67);
+insert into ElvenWorkers (elvenName, elvenAge, positionName, shiftNumber, numProducedToys) values ('Robby Danger', 14, 'Intern', 3, 0);
 
 insert into CurrentToys (toyName, toyColor, workTime, childID, elvenID) values ('Firetruck', 'Red', 2.9, 1, 1);
 insert into CurrentToys (toyName, toyColor, workTime, childID, elvenID) values ('Doll House', 'Green', 4.5, 2, 2);
 insert into CurrentToys (toyName, toyColor, workTime, childID, elvenID) values ('Barbie Doll', 'Tan', 2.0, 3, 3);
-insert into CurrentToys (toyName, toyColor, workTime, childID, elvenID) values ('Transformer Action Figure', 'Turquoise', 3.4, 4, 1);
+insert into CurrentToys (toyName, toyColor, workTime, childID, elvenID) values ('Transformer', 'Turquoise', 3.4, 4, 1);
 insert into CurrentToys (toyName, toyColor, workTime, childID, elvenID) values ('Rubiks Cube', 'Pink', 3.0, 5, 2);
 insert into CurrentToys (toyName, toyColor, workTime, childID, elvenID) values ('Bionicle', 'Violet', 2.9, 1, 3);
 

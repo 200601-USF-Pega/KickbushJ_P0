@@ -130,8 +130,7 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		}
 		
-		validInput = true;
-		
+		validInput = false;
 		while (!validInput) {
 		try {
 			System.out.println("Is the child naughty? (true/false)");
@@ -182,7 +181,7 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		}
 		
-		validInput = true;
+		validInput = false;
 		
 		while (!validInput) {
 			
@@ -199,7 +198,7 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		}
 		
-		validInput = true;
+		validInput = false;
 		
 		while (!validInput) {
 			
@@ -225,7 +224,7 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		}
 		
-		validInput = true;
+		validInput = false;
 		
 		
 		while (!validInput) {
@@ -253,7 +252,7 @@ public class ManagerMenuService implements ManagerMenuServiceInterface {
 		
 		}
 		
-		validInput = true;
+		validInput = false;
 		
 		
 		while (!validInput) {

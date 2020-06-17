@@ -77,12 +77,6 @@ public class ConnectionManager {
 			reader = new BufferedReader(new FileReader("resources/sql/InsertDummyData.sql"));
 			sr.runScript(reader);
 			
-			reader = new BufferedReader(new FileReader("resources/sql/CreateFunctions.sql"));
-			sr.runScript(reader);
-			
-			reader = new BufferedReader(new FileReader("resources/sql/CreateProcedures.sql"));
-			sr.runScript(reader);
-			
 			try {
 				ConnectionManager.getConnection().close();
 			} catch (SQLException e) {
